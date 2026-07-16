@@ -4,6 +4,8 @@ import com.blog.main.entity.Post;
 import com.blog.main.repository.PostRepository;
 import com.blog.main.mapper.PostMapper;
 import org.springframework.stereotype.Service;
+import com.blog.main.dto.CreatePostRequest;
+import com.blog.main.dto.PostResponse;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -26,7 +28,11 @@ public class PostService {
         return postRepository.findAll();
     }
 
-    public Post getPostById(Long id) {
+    public PostResponse getPostById(Long id) {
+        return postMapper.toResponse(getPostEntityById(id));
+    }
+
+    private Post getPostEntityById(Long id){
         return postRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Post not found"));
     }
@@ -37,17 +43,18 @@ public class PostService {
         return postMapper.toResponse(savedPost);
     }
 
-    public Post updatePost(Long id, Post updatedPost) {
-        Post post = getPostById(id);
+    public PostResponse updatePost(Long id, Post updatedPost) {
+        Post post = getPostEntityById(id);
 
         post.setTitle(updatedPost.getTitle());
         post.setContent(updatedPost.getContent());
         post.setUpdatedAt(LocalDateTime.now());
-
-        return postRepository.save(post);
+        Post savedPost = postRepository.save(post);
+        return postMapper.toResponse(savedPost);
     }
 
     public void deletePost(Long id) {
-        postRepository.deleteById(id);
+        Post post = getPostEntityById(id);
+        postRepository.delete(post);
     }
 }

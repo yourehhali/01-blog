@@ -1,7 +1,7 @@
 package com.blog.main.mapper;
 
 import com.blog.main.dto.CreatePostRequest;
-import com.blog.main.dto.CreatePostResponse;
+import com.blog.main.dto.PostResponse;
 import com.blog.main.entity.Post;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +23,7 @@ public class PostMapper {
 
     public PostResponse toResponse(Post post) {
 
-        PostResponse response = new CreatePostResponse();
+        PostResponse response = new PostResponse();
 
         response.setId(post.getId());
         response.setTitle(post.getTitle());

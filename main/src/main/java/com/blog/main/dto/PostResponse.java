@@ -2,7 +2,7 @@ package com.blog.main.dto;
 
 import java.time.LocalDateTime;
 
-public class CreatePostResponse {
+public class PostResponse {
 
     private Long id;
 

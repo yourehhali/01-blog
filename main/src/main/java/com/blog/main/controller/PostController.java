@@ -3,6 +3,8 @@ package com.blog.main.controller;
 import com.blog.main.entity.Post;
 import com.blog.main.service.PostService;
 import org.springframework.web.bind.annotation.*;
+import com.blog.main.dto.CreatePostRequest;
+import com.blog.main.dto.PostResponse;
 
 import java.util.List;
 
@@ -22,17 +24,17 @@ public class PostController {
     }
 
     @GetMapping("/{id}")
-    public Post getPost(@PathVariable Long id) {
+    public PostResponse getPost(@PathVariable Long id) {
         return postService.getPostById(id);
     }
 
     @PostMapping
-    public Post createPost(@RequestBody Post post) {
-        return postService.createPost(post);
+    public PostResponse createPost(@RequestBody CreatePostRequest request) {
+        return postService.createPost(request);
     }
 
     @PutMapping("/{id}")
-    public Post updatePost(
+    public PostResponse updatePost(
             @PathVariable Long id,
             @RequestBody Post post
     ) {
