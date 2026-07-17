@@ -30,8 +30,10 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @CreationTimestamp
     private LocalDateTime createdAt;
 
+    @UpdateTimestamp
     private LocalDateTime updatedAt;
 
 }
