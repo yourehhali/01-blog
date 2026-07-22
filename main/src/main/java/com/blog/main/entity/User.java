@@ -2,13 +2,19 @@ package com.blog.main.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import jakarta.validation.constraints.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
 
 @Entity
+@Table(
+        name = "users",
+        indexes = {
+                @Index(name = "idx_users_active", columnList = "active"),
+                @Index(name = "idx_users_created", columnList = "created_at")
+        }
+)
 @Getter
 @Setter
 @NoArgsConstructor
@@ -28,7 +34,16 @@ public class User {
     private String password;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Role role;
+
+    @Column(nullable = false)
+    private boolean active = true;
+
+    @Column(columnDefinition = "TEXT")
+    private String bio;
+
+    private String profilePicture;
 
     @CreationTimestamp
     private LocalDateTime createdAt;

@@ -1,57 +1,38 @@
 package com.blog.main.dto;
 
+import java.util.ArrayList;
 import java.time.LocalDateTime;
+import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class PostResponse {
 
     private Long id;
+
+    private String authorUsername;
 
     private String title;
 
     private String content;
 
+    private boolean published;
+
+    private boolean hiddenByAdmin;
+
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
 
+    private Long likes;
 
-    public Long getId() {
-        return id;
-    }
+    private int commentsCount;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private boolean likedByRequester;
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+    private List<String> mediaUrls = new ArrayList<>();
 }
