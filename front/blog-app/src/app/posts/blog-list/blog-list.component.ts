@@ -12,7 +12,6 @@ import { PostService } from '../../core/api/post.service';
 import { PostResponse } from '../../core/models/post';
 import { SpringPage } from '../../core/models/spring-page';
 import { PostCardComponent } from '../post-card/post-card.component';
-import { PostSidebarComponent } from '../post-sidebar/post-sidebar.component';
 import {
   PaginationComponent,
   Page
@@ -25,7 +24,6 @@ import { NgIconComponent } from '@ng-icons/core';
     imports: [
         CommonModule,
         PostCardComponent,
-        PostSidebarComponent,
         PaginationComponent,
         LoadingSpinnerComponent,
         NgIconComponent

@@ -1,4 +1,4 @@
-@import '../../shared/admin-table.shared.scss';
+@use '../../shared/admin-table.shared' as *;
 
 .col-type {
   width: 110px;

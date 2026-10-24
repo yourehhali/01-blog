@@ -11,13 +11,13 @@ import { PostService } from '../../core/api/post.service';
 import { PostResponse } from '../../core/models/post';
 import { SpringPage } from '../../core/models/spring-page';
 import { PostCardComponent } from '../post-card/post-card.component';
-import { PaginationComponent, Page } from '../../shared/components/pagination/pagination.component';
+import { Page } from '../../shared/components/pagination/pagination.component';
 import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner.component';
 import { NgIconComponent } from "@ng-icons/core";
 
 @Component({
     selector: 'app-home',
-    imports: [CommonModule, RouterModule, PostCardComponent, PaginationComponent, LoadingSpinnerComponent, NgIconComponent],
+    imports: [CommonModule, RouterModule, PostCardComponent, LoadingSpinnerComponent, NgIconComponent],
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
