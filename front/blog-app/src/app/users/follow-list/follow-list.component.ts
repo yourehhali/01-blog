@@ -11,18 +11,17 @@ import type { UserResponse } from '../../core/models/user';
 export type FollowListKind = 'followers' | 'following';
 
 @Component({
-  selector: 'app-users-follow-list',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    DatePipe,
-    MediaUrlPipe,
-    LoadingSpinnerComponent
-  ],
-  templateUrl: './follow-list.component.html',
-  styleUrls: ['./follow-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-users-follow-list',
+    imports: [
+        CommonModule,
+        RouterModule,
+        DatePipe,
+        MediaUrlPipe,
+        LoadingSpinnerComponent
+    ],
+    templateUrl: './follow-list.component.html',
+    styleUrls: ['./follow-list.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UsersFollowListComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);

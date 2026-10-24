@@ -27,17 +27,16 @@ import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner
 import { NgIconComponent } from '@ng-icons/core';
 
 @Component({
-  selector: 'app-post-edit',
-  standalone: true,
-  imports: [
-    CommonModule,
-    PostFormComponent,
-    LoadingSpinnerComponent,
-    NgIconComponent,
-  ],
-  templateUrl: './post-edit.component.html',
-  styleUrls: ['./post-edit.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-post-edit',
+    imports: [
+        CommonModule,
+        PostFormComponent,
+        LoadingSpinnerComponent,
+        NgIconComponent,
+    ],
+    templateUrl: './post-edit.component.html',
+    styleUrls: ['./post-edit.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostEditComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);

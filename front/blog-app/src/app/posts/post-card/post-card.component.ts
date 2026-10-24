@@ -6,12 +6,11 @@ import { MediaUrlPipe } from '../../shared/pipes/media-url.pipe';
 import { NgIconComponent } from "@ng-icons/core";
 
 @Component({
-  selector: 'app-post-card',
-  standalone: true,
-  imports: [CommonModule, RouterModule, MediaUrlPipe, NgIconComponent],
-  templateUrl: './post-card.component.html',
-  styleUrls: ['./post-card.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-post-card',
+    imports: [CommonModule, RouterModule, MediaUrlPipe, NgIconComponent],
+    templateUrl: './post-card.component.html',
+    styleUrls: ['./post-card.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostCardComponent {
   @Input({ required: true }) post!: PostResponse;

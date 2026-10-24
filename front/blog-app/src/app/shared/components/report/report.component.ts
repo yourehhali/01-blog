@@ -3,11 +3,10 @@ import { Component, input, output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 @Component({
-  selector: 'app-report',
-  standalone: true,
-  imports: [FormsModule],
-  templateUrl: './report.component.html',
-  styleUrl: './report.component.scss',
+    selector: 'app-report',
+    imports: [FormsModule],
+    templateUrl: './report.component.html',
+    styleUrl: './report.component.scss'
 })
 export class ReportComponent {
   readonly targetType = input<'user' | 'post'>('user');

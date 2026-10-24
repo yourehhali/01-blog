@@ -22,17 +22,16 @@ import { AlertService } from '../../core/api/alert.service';
 import { CommentResponse } from '../../core/models/comment';
 
 @Component({
-  selector: 'app-comments-section',
-  standalone: true,
-  imports: [
-    DatePipe,
-    RouterModule,
-    ReactiveFormsModule,
-    NgIconComponent,
-  ],
-  templateUrl: './comments-section.component.html',
-  styleUrls: ['./comments-section.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-comments-section',
+    imports: [
+        DatePipe,
+        RouterModule,
+        ReactiveFormsModule,
+        NgIconComponent,
+    ],
+    templateUrl: './comments-section.component.html',
+    styleUrls: ['./comments-section.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CommentsSectionComponent implements OnChanges {
   @Input({ required: true }) postId!: number;

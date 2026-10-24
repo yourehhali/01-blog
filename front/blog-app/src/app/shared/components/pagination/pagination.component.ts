@@ -14,12 +14,11 @@ export interface Page<Item = unknown> {
 }
 
 @Component({
-  selector: 'app-pagination',
-  standalone: true,
-  imports: [CommonModule, NgIconComponent],
-  templateUrl: './pagination.component.html',
-  styleUrls: ['./pagination.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-pagination',
+    imports: [CommonModule, NgIconComponent],
+    templateUrl: './pagination.component.html',
+    styleUrls: ['./pagination.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PaginationComponent {
   @Input() page!: Page;

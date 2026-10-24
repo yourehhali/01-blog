@@ -37,21 +37,20 @@ import type { PostResponse } from '../../core/models/post';
 import type { SubscriptionStatus } from '../../core/models/subscription';
 
 @Component({
-  selector: 'app-users-profile',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    DatePipe,
-    MediaUrlPipe,
-    ReportComponent,
-    LoadingSpinnerComponent,
-    PostCardComponent,
-    NgIconComponent,
-  ],
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-users-profile',
+    imports: [
+        CommonModule,
+        RouterModule,
+        DatePipe,
+        MediaUrlPipe,
+        ReportComponent,
+        LoadingSpinnerComponent,
+        PostCardComponent,
+        NgIconComponent,
+    ],
+    templateUrl: './profile.component.html',
+    styleUrls: ['./profile.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UsersProfileComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);

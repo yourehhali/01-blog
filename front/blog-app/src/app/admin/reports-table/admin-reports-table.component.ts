@@ -16,16 +16,15 @@ import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner
 import { NgIconComponent } from "@ng-icons/core";
 
 @Component({
-  selector: 'app-admin-reports-table',
-  standalone: true,
-  imports: [
-    CommonModule,
-    DatePipe,
-    LoadingSpinnerComponent,
-    NgIconComponent
-  ],
-  templateUrl: './admin-reports-table.component.html',
-  styleUrls: ['./admin-reports-table.component.scss'],
+    selector: 'app-admin-reports-table',
+    imports: [
+        CommonModule,
+        DatePipe,
+        LoadingSpinnerComponent,
+        NgIconComponent
+    ],
+    templateUrl: './admin-reports-table.component.html',
+    styleUrls: ['./admin-reports-table.component.scss']
 })
 export class AdminReportsTableComponent implements OnInit {
   private readonly adminService = inject(AdminService);

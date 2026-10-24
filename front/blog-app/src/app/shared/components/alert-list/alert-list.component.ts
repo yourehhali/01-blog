@@ -4,12 +4,11 @@ import { AlertService } from '../../../core/api/alert.service';
 import { NgIconComponent } from "@ng-icons/core";
 
 @Component({
-  selector: 'app-alert-list',
-  standalone: true,
-  imports: [CommonModule, NgIconComponent],
-  templateUrl: './alert-list.component.html',
-  styleUrls: ['./alert-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-alert-list',
+    imports: [CommonModule, NgIconComponent],
+    templateUrl: './alert-list.component.html',
+    styleUrls: ['./alert-list.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AlertListComponent {
   private readonly alertService = inject(AlertService);

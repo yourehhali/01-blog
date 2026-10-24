@@ -16,12 +16,11 @@ import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner
 import { NgIconComponent } from "@ng-icons/core";
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [CommonModule, RouterModule, PostCardComponent, PaginationComponent, LoadingSpinnerComponent, NgIconComponent],
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-home',
+    imports: [CommonModule, RouterModule, PostCardComponent, PaginationComponent, LoadingSpinnerComponent, NgIconComponent],
+    templateUrl: './home.component.html',
+    styleUrls: ['./home.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent implements OnInit {
   private readonly postService = inject(PostService);

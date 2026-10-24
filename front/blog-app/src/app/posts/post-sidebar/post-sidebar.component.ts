@@ -8,12 +8,11 @@ import { MediaUrlPipe } from '../../shared/pipes/media-url.pipe';
 import { NgIconComponent } from "@ng-icons/core";
 
 @Component({
-  selector: 'app-post-sidebar',
-  standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule, MediaUrlPipe, NgIconComponent],
-  templateUrl: './post-sidebar.component.html',
-  styleUrls: ['./post-sidebar.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-post-sidebar',
+    imports: [CommonModule, RouterModule, FormsModule, MediaUrlPipe, NgIconComponent],
+    templateUrl: './post-sidebar.component.html',
+    styleUrls: ['./post-sidebar.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostSidebarComponent implements OnInit {
   private readonly postService = inject(PostService);

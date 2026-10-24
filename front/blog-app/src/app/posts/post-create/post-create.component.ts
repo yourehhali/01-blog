@@ -11,12 +11,11 @@ import {
 import { NgIconComponent } from "@ng-icons/core";
 
 @Component({
-  selector: 'app-post-create',
-  standalone: true,
-  imports: [CommonModule, PostFormComponent, NgIconComponent],
-  templateUrl: './post-create.component.html',
-  styleUrls: ['./post-create.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-post-create',
+    imports: [CommonModule, PostFormComponent, NgIconComponent],
+    templateUrl: './post-create.component.html',
+    styleUrls: ['./post-create.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostCreateComponent {
   private readonly postService = inject(PostService);

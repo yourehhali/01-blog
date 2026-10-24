@@ -17,17 +17,16 @@ import { AuthService, AlertService } from '../../core/api';
 import { NgIconComponent } from '@ng-icons/core';
 
 @Component({
-  selector: 'app-register',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    RouterModule,
-    NgIconComponent
-  ],
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-register',
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        RouterModule,
+        NgIconComponent
+    ],
+    templateUrl: './register.component.html',
+    styleUrls: ['./register.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegisterComponent {
   private readonly fb = inject(FormBuilder);

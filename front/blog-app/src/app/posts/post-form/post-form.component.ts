@@ -17,12 +17,11 @@ export interface PostFormInitialValues {
 }
 
 @Component({
-  selector: 'app-post-form',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NgIconComponent],
-  templateUrl: './post-form.component.html',
-  styleUrls: ['./post-form.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-post-form',
+    imports: [CommonModule, ReactiveFormsModule, NgIconComponent],
+    templateUrl: './post-form.component.html',
+    styleUrls: ['./post-form.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostFormComponent implements OnInit {
   @Input() initialValues: PostFormInitialValues | null = null;

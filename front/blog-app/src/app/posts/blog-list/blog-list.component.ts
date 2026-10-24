@@ -21,19 +21,18 @@ import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner
 import { NgIconComponent } from '@ng-icons/core';
 
 @Component({
-  selector: 'app-blog-list',
-  standalone: true,
-  imports: [
-    CommonModule,
-    PostCardComponent,
-    PostSidebarComponent,
-    PaginationComponent,
-    LoadingSpinnerComponent,
-    NgIconComponent
-  ],
-  templateUrl: './blog-list.component.html',
-  styleUrls: ['./blog-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-blog-list',
+    imports: [
+        CommonModule,
+        PostCardComponent,
+        PostSidebarComponent,
+        PaginationComponent,
+        LoadingSpinnerComponent,
+        NgIconComponent
+    ],
+    templateUrl: './blog-list.component.html',
+    styleUrls: ['./blog-list.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BlogListComponent implements OnInit {
   private readonly postService = inject(PostService);

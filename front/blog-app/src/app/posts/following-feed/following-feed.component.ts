@@ -15,12 +15,11 @@ import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner
 import { NgIconComponent } from "@ng-icons/core";
 
 @Component({
-  selector: 'app-following-feed',
-  standalone: true,
-  imports: [CommonModule, PostCardComponent, PaginationComponent, LoadingSpinnerComponent, NgIconComponent],
-  templateUrl: './following-feed.component.html',
-  styleUrls: ['./following-feed.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-following-feed',
+    imports: [CommonModule, PostCardComponent, PaginationComponent, LoadingSpinnerComponent, NgIconComponent],
+    templateUrl: './following-feed.component.html',
+    styleUrls: ['./following-feed.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FollowingFeedComponent implements OnInit {
   private readonly postService = inject(PostService);

@@ -24,17 +24,16 @@ interface AdminNavLink {
 }
 
 @Component({
-  selector: 'app-admin-layout',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    MediaUrlPipe,
-    NgIconComponent,
-  ],
-  templateUrl: './admin-layout.component.html',
-  styleUrls: ['./admin-layout.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-admin-layout',
+    imports: [
+        CommonModule,
+        RouterModule,
+        MediaUrlPipe,
+        NgIconComponent,
+    ],
+    templateUrl: './admin-layout.component.html',
+    styleUrls: ['./admin-layout.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AdminLayoutComponent implements OnInit {
   private readonly auth = inject(AuthService);

@@ -21,17 +21,16 @@ import { AuthService, AlertService } from '../../core/api';
 import { NgIconComponent } from '@ng-icons/core';
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    RouterModule,
-    NgIconComponent
-  ],
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-login',
+    imports: [
+        CommonModule,
+        ReactiveFormsModule,
+        RouterModule,
+        NgIconComponent
+    ],
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginComponent {
   private readonly fb = inject(FormBuilder);

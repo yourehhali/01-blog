@@ -21,12 +21,11 @@ declare global {
 }
 
 @Component({
-  selector: 'app-confirm-modal',
-  standalone: true,
-  imports: [CommonModule],
-  templateUrl: './confirm-modal.component.html',
-  styleUrls: ['./confirm-modal.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-confirm-modal',
+    imports: [CommonModule],
+    templateUrl: './confirm-modal.component.html',
+    styleUrls: ['./confirm-modal.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConfirmModalComponent implements AfterViewInit, OnDestroy {
   @Input() title = 'Confirm';

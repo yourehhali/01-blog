@@ -17,17 +17,16 @@ import { MediaUrlPipe } from '../../shared/pipes/media-url.pipe';
 import { NgIconComponent } from '@ng-icons/core';
 
 @Component({
-  selector: 'app-authenticated-layout',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    MediaUrlPipe,
-    NgIconComponent,
-  ],
-  templateUrl: './authenticated-layout.component.html',
-  styleUrls: ['./authenticated-layout.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-authenticated-layout',
+    imports: [
+        CommonModule,
+        RouterModule,
+        MediaUrlPipe,
+        NgIconComponent,
+    ],
+    templateUrl: './authenticated-layout.component.html',
+    styleUrls: ['./authenticated-layout.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AuthenticatedLayoutComponent implements OnInit {
   private readonly auth = inject(AuthService);

@@ -29,19 +29,18 @@ import type {
 import { NgIconComponent } from '@ng-icons/core';
 
 @Component({
-  selector: 'app-users-profile-edit',
-  standalone: true,
-  imports: [
-    CommonModule,
-    RouterModule,
-    ReactiveFormsModule,
-    MediaUrlPipe,
-    LoadingSpinnerComponent,
-    NgIconComponent,
-  ],
-  templateUrl: './profile-edit.component.html',
-  styleUrls: ['./profile-edit.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-users-profile-edit',
+    imports: [
+        CommonModule,
+        RouterModule,
+        ReactiveFormsModule,
+        MediaUrlPipe,
+        LoadingSpinnerComponent,
+        NgIconComponent,
+    ],
+    templateUrl: './profile-edit.component.html',
+    styleUrls: ['./profile-edit.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UsersProfileEditComponent implements OnInit {
   private readonly fb = inject(FormBuilder);

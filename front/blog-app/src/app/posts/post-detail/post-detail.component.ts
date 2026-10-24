@@ -36,21 +36,20 @@ import { CommentsSectionComponent } from '../comments-section/comments-section.c
 import { PostCardComponent } from '../post-card/post-card.component';
 
 @Component({
-  selector: 'app-post-detail',
-  standalone: true,
-  imports: [
-    DatePipe,
-    RouterModule,
-    MediaGalleryComponent,
-    LoadingSpinnerComponent,
-    ReportComponent,
-    CommentsSectionComponent,
-    PostCardComponent,
-    NgIconComponent,
-  ],
-  templateUrl: './post-detail.component.html',
-  styleUrls: ['./post-detail.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-post-detail',
+    imports: [
+        DatePipe,
+        RouterModule,
+        MediaGalleryComponent,
+        LoadingSpinnerComponent,
+        ReportComponent,
+        CommentsSectionComponent,
+        PostCardComponent,
+        NgIconComponent,
+    ],
+    templateUrl: './post-detail.component.html',
+    styleUrls: ['./post-detail.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostDetailComponent {
   private readonly route = inject(ActivatedRoute);

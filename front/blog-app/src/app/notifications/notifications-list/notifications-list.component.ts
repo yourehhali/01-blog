@@ -23,18 +23,17 @@ import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner
 import { NgIconComponent } from '@ng-icons/core';
 
 @Component({
-  selector: 'app-notifications-list',
-  standalone: true,
-  imports: [
-    CommonModule,
-    DatePipe,
-    PaginationComponent,
-    LoadingSpinnerComponent,
-    NgIconComponent,
-  ],
-  templateUrl: './notifications-list.component.html',
-  styleUrls: ['./notifications-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-notifications-list',
+    imports: [
+        CommonModule,
+        DatePipe,
+        PaginationComponent,
+        LoadingSpinnerComponent,
+        NgIconComponent,
+    ],
+    templateUrl: './notifications-list.component.html',
+    styleUrls: ['./notifications-list.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NotificationsListComponent implements OnInit {
   private readonly notificationService = inject(NotificationService);

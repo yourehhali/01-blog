@@ -15,12 +15,11 @@ import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner
 import { NgIconComponent } from "@ng-icons/core";
 
 @Component({
-  selector: 'app-admin-stats',
-  standalone: true,
-  imports: [CommonModule, LoadingSpinnerComponent, NgIconComponent],
-  templateUrl: './admin-stats.component.html',
-  styleUrls: ['./admin-stats.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+    selector: 'app-admin-stats',
+    imports: [CommonModule, LoadingSpinnerComponent, NgIconComponent],
+    templateUrl: './admin-stats.component.html',
+    styleUrls: ['./admin-stats.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AdminStatsComponent implements OnInit {
   private readonly adminService = inject(AdminService);

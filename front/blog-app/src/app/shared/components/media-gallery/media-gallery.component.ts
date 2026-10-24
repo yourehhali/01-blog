@@ -3,12 +3,11 @@ import { CommonModule } from '@angular/common';
 import { MediaUrlPipe } from '../../pipes/media-url.pipe';
 
 @Component({
-  selector: 'app-media-gallery',
-  standalone: true,
-  imports: [CommonModule, MediaUrlPipe],
-  templateUrl: './media-gallery.component.html',
-  styleUrls: ['./media-gallery.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+    selector: 'app-media-gallery',
+    imports: [CommonModule, MediaUrlPipe],
+    templateUrl: './media-gallery.component.html',
+    styleUrls: ['./media-gallery.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MediaGalleryComponent {
   @Input() mediaUrls: string[] = [];
