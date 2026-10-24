@@ -1,0 +1,45 @@
+.about-page {
+  color: #D1D1D1;
+  padding: 40px 100px 60px;
+}
+
+.about-page h2,
+.about-page h3 {
+  color: #fff;
+}
+
+.about-page .text-muted {
+  color: #ACACAC !important;
+}
+
+.about-page .sup-header {
+  color: #fff;
+  border-bottom: 2px solid #bf61f6;
+  padding-bottom: 8px;
+  display: inline-block;
+}
+
+.about-page .underscore {
+  color: #fff;
+  border-bottom: 2px solid #bf61f6;
+  padding-bottom: 8px;
+  display: inline-block;
+}
+
+.about-page .sidebar {
+  color: #D1D1D1;
+}
+
+.about-page .list-in-text {
+  color: #D1D1D1;
+  li { margin-bottom: 8px; }
+}
+
+.features .feature-icon {
+  color: #bf61f6;
+  transition: color 0.2s ease;
+}
+
+.features .col:hover .feature-icon {
+  color: #fff;
+}

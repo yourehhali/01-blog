@@ -1,0 +1,20 @@
+:host {
+  flex: 0 0 calc(50% - 11px);
+  width: calc(50% - 11px);
+  max-width: calc(50% - 11px);
+  min-width: 0;
+  display: block;
+}
+
+.post-card {
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (max-width: 991px) {
+  :host {
+    flex: 0 0 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+}

@@ -1,0 +1,231 @@
+<nav class="navbar navbar-expand-lg dark auth-navbar">
+  <div class="container">
+
+    <a class="navbar-brand" routerLink="/">
+      <img src="assets/ui/logo.png" alt="O1 BLOG" />
+    </a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarAuth"
+      aria-controls="navbarAuth"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <ng-icon name="lucideMenu" size="20" />
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarPublic">
+      <ul class="navbar-nav align-items-lg-center">
+
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            Home
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/blog"
+            routerLinkActive="active"
+          >
+            Blog
+          </a>
+        </li>
+
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLink="/about"
+            routerLinkActive="active"
+          >
+            About
+          </a>
+        </li>
+
+        @if (isAuthenticated()) {
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLink="/feed"
+              routerLinkActive="active"
+            >
+              Feed
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link position-relative"
+              routerLink="/notifications"
+              routerLinkActive="active"
+            >
+              <ng-icon name="lucideBell" size="18" />
+
+              @if (unreadCount() > 0) {
+                <span class="notif-badge">
+                  {{
+                    unreadCount() > 99
+                      ? '99+'
+                      : unreadCount()
+                  }}
+                </span>
+              }
+            </a>
+          </li>
+        }
+
+      </ul>
+    </div>
+    <div class="navbar-actions">
+      <div class="nav-item dropdown">
+
+        <button
+          type="button"
+          class="nav-link dropdown-toggle d-flex align-items-center"
+          id="userMenuAuth"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+          aria-label="Open user menu"
+        >
+          @if (currentUser(); as user) {
+            @if (user.profilePicture | mediaUrl; as profilePicture) {
+              <img
+                [src]="profilePicture"
+                alt="avatar"
+                class="rounded-circle"
+                style="width: 28px; height: 28px; object-fit: cover;"
+              />
+            } @else {
+              <span
+                class="rounded-circle d-inline-flex align-items-center justify-content-center"
+                style="width: 28px; height: 28px; font-size: 12px; font-weight: 700; background: #bf61f6; color: #000;"
+              >
+                {{ user.username | slice: 0:1 | uppercase }}
+              </span>
+            }
+          }
+        </button>
+
+        <ul
+          class="dropdown-menu dropdown-menu-end"
+          aria-labelledby="userMenuAuth"
+        >
+
+          @if (currentUser(); as user) {
+            <li>
+              <a
+                class="dropdown-item"
+                [routerLink]="[
+                  '/users',
+                  user.username
+                ]"
+              >
+                <ng-icon
+                  name="lucideUser"
+                  size="16"
+                  class="me-2"
+                />
+                My Profile
+              </a>
+            </li>
+          }
+
+          <li>
+            <a
+              class="dropdown-item"
+              routerLink="/posts/new"
+            >
+              <ng-icon
+                name="lucidePenTool"
+                size="16"
+                class="me-2"
+              />
+              New Post
+            </a>
+          </li>
+
+          <li>
+            <a
+              class="dropdown-item"
+              routerLink="/profile"
+            >
+              <ng-icon
+                name="lucideUserPen"
+                size="16"
+                class="me-2"
+              />
+              Edit Profile
+            </a>
+          </li>
+
+          @if (isAdmin()) {
+            <li>
+              <a
+                class="dropdown-item"
+                routerLink="/admin"
+              >
+                <ng-icon
+                  name="lucideShieldHalf"
+                  size="16"
+                  class="me-2"
+                />
+                Admin Dashboard
+              </a>
+            </li>
+          }
+
+          <li>
+            <hr class="dropdown-divider" />
+          </li>
+
+          <li>
+            <button
+              type="button"
+              class="dropdown-item text-danger"
+              (click)="logout()"
+            >
+              <ng-icon
+                name="lucideLogOut"
+                size="16"
+                class="me-2"
+              />
+              Logout
+            </button>
+          </li>
+
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</nav>
+<main class="mainmargin">
+  <router-outlet />
+</main>
+
+<footer>
+  <div class="footer-content">
+
+    <div class="copyright">
+      <p>
+        &copy; {{ todayYear }}
+        <a routerLink="/">O1 BLOG</a>
+      </p>
+    </div>
+
+    <div class="footer-links">
+      <a routerLink="/blog">Blog</a>
+      <a routerLink="/about">About</a>
+    </div>
+
+  </div>
+</footer>

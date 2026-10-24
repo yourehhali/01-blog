@@ -1,0 +1,26 @@
+@if (mediaUrls && mediaUrls.length > 0) {
+  <div class="media-gallery">
+    <div
+      class="row g-2"
+      [ngClass]="{
+        'row-cols-1': mediaUrls.length === 1,
+        'row-cols-2': mediaUrls.length === 2,
+        'row-cols-2 row-cols-md-3': mediaUrls.length >= 3
+      }"
+    >
+      @for (url of mediaUrls; track url; let i = $index) {
+        <div class="col">
+          <div class="media-item">
+            <img
+              [src]="url | mediaUrl"
+              alt="Media"
+              class="img-fluid w-100 h-100 object-fit-cover rounded"
+              [attr.loading]="i === 0 ? 'eager' : 'lazy'"
+              [attr.fetchpriority]="i === 0 ? 'high' : 'auto'"
+            />
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+}

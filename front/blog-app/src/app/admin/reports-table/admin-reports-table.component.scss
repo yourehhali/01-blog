@@ -1,0 +1,76 @@
+@import '../../shared/admin-table.shared.scss';
+
+.col-type {
+  width: 110px;
+  white-space: nowrap;
+}
+
+.type-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid;
+  border-radius: 4px;
+
+  &.type-post {
+    border-color: #007bff;
+    color: #007bff;
+    background-color: rgba(0, 123, 255, 0.1);
+  }
+
+  &.type-user {
+    border-color: #e74c3c;
+    color: #e74c3c;
+    background-color: rgba(231, 76, 60, 0.1);
+  }
+}
+
+.col-target {
+  width: 180px;
+}
+
+.target-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.3;
+}
+
+.target-username {
+  font-weight: 700;
+  color: #fff;
+  font-size: 0.88rem;
+}
+
+.target-id {
+  font-size: 0.72rem;
+  color: #7a7a7a;
+}
+
+.col-reporter {
+  width: 150px;
+}
+
+.reporter-username {
+  font-weight: 600;
+  color: #ACACAC;
+  font-size: 0.85rem;
+}
+
+.col-reason {
+  max-width: 350px;
+}
+
+.reason-text {
+  color: #D1D1D1;
+  font-size: 0.88rem;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

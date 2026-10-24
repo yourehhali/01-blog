@@ -1,0 +1,195 @@
+<div class="profile-page">
+  @if (loadingUser$ | async) {
+    <app-loading-spinner />
+  }
+
+  @if (user$ | async; as user) {
+    <div class="profile-card">
+      <div class="profile-avatar-wrapper">
+        <img
+          class="profile-avatar"
+          [src]="user.profilePicture | mediaUrl"
+          [alt]="user.username"
+          (error)="$any($event.target).style.display = 'none'"
+        />
+
+        @if (!user.profilePicture) {
+          <div class="profile-avatar-fallback">
+            {{ user.username.charAt(0).toUpperCase() }}
+          </div>
+        }
+      </div>
+
+      <div class="profile-info">
+        <p class="profile-label">AUTHOR PROFILE</p>
+
+        <h1 class="profile-name">{{ user.username }}</h1>
+
+        <div class="profile-handle-row">
+          <span class="profile-handle">{{ '@' }}{{ user.username }}</span>
+
+          @if (user.role === 'ADMIN') {
+            <span class="profile-role-badge">ADMIN</span>
+          }
+
+          @if (user.role === 'USER') {
+            <span class="profile-role-badge">USER</span>
+          }
+        </div>
+
+        @if (user.bio) {
+          <p class="profile-bio">{{ user.bio }}</p>
+        }
+
+        <p class="profile-joined">
+          <ng-icon name="lucideCalendar" size="16" />
+          <span>Joined {{ user.createdAt | date: 'mediumDate' }}</span>
+        </p>
+      </div>
+
+      @if (auth$ | async; as auth) {
+        <div class="profile-actions">
+          @if (auth.isAuthenticated && auth.currentUser) {
+            @if (auth.currentUser.id !== user.id) {
+              <button
+                class="profile-btn follow-btn"
+                (click)="onToggleFollow(user)"
+                [disabled]="!!(subActionLoading$ | async)"
+              >
+                @if (subActionLoading$ | async) {
+                  <ng-icon
+                    name="lucideLoader"
+                    size="16"
+                    class="spin"
+                  />
+                } @else {
+                  @if ((subStatus$ | async)?.subscribed) {
+                    <ng-icon name="lucideCheck" size="16" />
+                  } @else {
+                    <ng-icon name="lucidePlus" size="16" />
+                  }
+                }
+
+                <span>
+                  @if ((subStatus$ | async)?.subscribed) {
+                    Unfollow
+                  } @else {
+                    Follow
+                  }
+                </span>
+              </button>
+
+              <button
+                class="profile-btn report-btn"
+                (click)="onReportUser(user)"
+              >
+                <ng-icon name="lucideFlag" size="16" />
+                <span>Report</span>
+              </button>
+            } @else {
+              <a class="profile-btn follow-btn" routerLink="/profile">
+                <ng-icon name="lucideSquarePen" size="16" />
+                <span>Edit Profile</span>
+              </a>
+            }
+          } @else {
+            <a
+              class="profile-btn follow-btn"
+              routerLink="/login"
+              [queryParams]="{
+                returnUrl: '/users/' + user.username
+              }"
+            >
+              <ng-icon name="lucidePlus" size="16" />
+              <span>Follow</span>
+            </a>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="profile-stats-row">
+      <div class="stat-item">
+        <strong>{{ user.postsCount }}</strong>
+        <span>Posts</span>
+      </div>
+
+      <a
+        class="stat-item stat-link"
+        [routerLink]="['/users/', user.username,  'followers']"
+      >
+        <strong>
+          {{ (subStatus$ | async)?.followersCount ?? user.followersCount }}
+        </strong>
+        <span>Followers</span>
+      </a>
+
+      <a
+        class="stat-item stat-link"
+        [routerLink]="['/users/', user.username, 'following']"
+      >
+        <strong>
+          {{ (subStatus$ | async)?.followingCount ?? user.followingCount }}
+        </strong>
+        <span>Following</span>
+      </a>
+    </div>
+
+    <section class="profile-posts-section">
+      <div class="section-top">
+        <p>Posts</p>
+      </div>
+
+      <span class="divider"></span>
+
+      @if (loadingPosts$ | async) {
+        <app-loading-spinner />
+      }
+
+      @if (
+        !(loadingPosts$ | async) &&
+        (posts$ | async)?.length === 0
+      ) {
+        <div class="empty-state">
+          <ng-icon
+            name="lucideFeather"
+            size="40"
+            class="empty-icon"
+          />
+          <p class="empty-text">No posts yet.</p>
+        </div>
+      }
+
+      @if (posts$ | async; as posts) {
+        <div class="posts-grid">
+          @for (post of posts; track post.id) {
+            <app-post-card [post]="post" />
+          }
+        </div>
+      }
+    </section>
+  }
+
+  @if (!(loadingUser$ | async) && !(user$ | async)) {
+    <div class="empty-state">
+      <ng-icon
+        name="lucideUserX"
+        size="40"
+        class="empty-icon"
+      />
+      <p class="empty-text">User not found</p>
+      <a routerLink="/blog" class="read-btn">Back to Blog</a>
+    </div>
+  }
+</div>
+
+@if (showReportModal()) {
+  @if (selectedReportUser(); as user) {
+    <app-report
+      [targetUsername]="user.username"
+      [submitting]="reportSubmitting()"
+      (submitReport)="onSubmitUserReport($event)"
+      (cancel)="closeReportModal()"
+    />
+  }
+}

@@ -1,0 +1,27 @@
+<article class="post-card">
+  <a class="post-card-media" [routerLink]="['/posts', post.id]" *ngIf="firstMediaUrl">
+    <img [src]="firstMediaUrl | mediaUrl" [alt]="post.title" loading="lazy" />
+  </a>
+  <div class="post-card-media" *ngIf="!firstMediaUrl">
+    <img src="assets/ui/Post.png" [alt]="post.title" loading="lazy" />
+  </div>
+  <div class="post-card-body">
+    <h2 class="post-card-title">
+      <a [routerLink]="['/posts', post.id]">{{ post.title }}</a>
+    </h2>
+    <div class="post-card-meta">
+      <a class="post-card-author" [routerLink]="['/users/', post.authorUsername]">
+        <img src="assets/ui/pdpsmall.png" alt="" />
+        <span>{{ post.authorUsername }}</span>
+      </a>
+      <div class="post-card-time">
+        <span>&middot;</span>
+        <time>{{ post.createdAt | date:'mediumDate' }}</time>
+      </div>
+    </div>
+    <p class="post-card-excerpt">{{ post.content | slice:0:160 }}{{ post.content.length > 160 ? '...' : '' }}</p>
+    <a class="read-btn" [routerLink]="['/posts', post.id]">
+      Show me more <ng-icon name="lucideArrowRight" size="14"></ng-icon>
+    </a>
+  </div>
+</article>

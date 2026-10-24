@@ -1,0 +1,162 @@
+
+<div class="post-detail-page">
+  <div class="post-detail-container">
+    @if (loading()) {
+      <app-loading-spinner />
+    }
+
+    @if (post(); as currentPost) {
+      @if (!loading()) {
+        <article class="post-detail">
+          <a class="btn-back" routerLink="/blog">
+            <ng-icon name="lucideArrowLeft" size="16" />
+            <span>Back to blog</span>
+          </a>
+
+          <h1 class="post-title">{{ currentPost.title }}</h1>
+
+          <div class="post-meta">
+            <a
+              class="post-author"
+              [routerLink]="['/users/', currentPost.authorUsername]"
+            >
+              <img
+                src="assets/ui/pdpsmall.png"
+                alt=""
+                class="author-avatar"
+              />
+              <span>{{ currentPost.authorUsername }}</span>
+            </a>
+
+            <span class="meta-separator">&middot;</span>
+
+            <time class="post-date" [attr.datetime]="currentPost.createdAt">
+              <ng-icon name="lucideCalendar" size="14" />
+              <span>{{ currentPost.createdAt | date: 'longDate' }}</span>
+            </time>
+          </div>
+
+          <div class="post-content-card">
+            @if (currentPost.mediaUrls.length) {
+              <app-media-gallery [mediaUrls]="currentPost.mediaUrls" />
+            }
+
+            <div class="post-content">{{ currentPost.content }}</div>
+          </div>
+
+          <div class="post-actions">
+            <button
+              type="button"
+              class="btn-like"
+              [class.liked]="likedByRequester()"
+              [disabled]="!isAuthenticated() || likeLoading()"
+              (click)="onToggleLike()"
+              [attr.aria-pressed]="likedByRequester()"
+              [attr.aria-label]="
+                likedByRequester() ? 'Unlike post' : 'Like post'
+              "
+              [title]="!isAuthenticated() ? 'Login to like' : 'Like post'"
+            >
+              @if (likeLoading()) {
+                <ng-icon name="lucideLoader" size="18" class="spin" />
+              } @else {
+                <ng-icon
+                  name="lucideHeart"
+                  size="18"
+                  [style.fill]="likedByRequester() ? 'currentColor' : 'none'"
+                />
+              }
+
+              <span>{{ likes() }}</span>
+            </button>
+
+            @if (isAuthenticated()) {
+              <button
+                type="button"
+                class="btn-report"
+                (click)="onOpenReport()"
+                [disabled]="reportLoading()"
+              >
+                <ng-icon name="lucideFlag" size="16" />
+                <span>Report</span>
+              </button>
+            }
+
+            @if (canEdit()) {
+              <a
+                class="btn-edit"
+                [routerLink]="['/posts', currentPost.id, 'edit']"
+              >
+                <ng-icon name="lucideSquarePen" size="16" />
+                <span>Edit</span>
+              </a>
+            }
+          </div>
+
+          <!--
+            Report modal styling reference from the previous inline form:
+
+            .report-form-wrapper
+            .report-form
+            .report-title
+            .form-group
+            .has-error
+            .form-label
+            .report-textarea
+            .form-error
+            .report-actions
+            .btn-cancel
+            .btn-submit-report
+
+            Reuse or adapt these classes in report.component.scss.
+          -->
+
+          @if (showReportForm()) {
+            <app-report
+              targetType="post"
+              [targetTitle]="currentPost.title"
+              [submitting]="reportLoading()"
+              (submitReport)="onSubmitReport($event)"
+              (cancel)="onCancelReport()"
+            />
+          }
+
+          @if (recentPosts().length > 0) {
+            <section class="recent-posts-section">
+              <div class="section-top">
+                <p>Recent Posts</p>
+
+                <a class="viewall-btn" routerLink="/blog">
+                  View All
+                  <ng-icon name="lucideChevronRight" size="14" />
+                </a>
+              </div>
+
+              <span class="divider"></span>
+
+              <div class="posts-grid">
+                @for (recentPost of recentPosts(); track recentPost.id) {
+                  <app-post-card [post]="recentPost" />
+                }
+              </div>
+            </section>
+          }
+
+          <div class="post-comments-section">
+            <app-comments-section [postId]="currentPost.id" />
+          </div>
+        </article>
+      }
+    } @else if (!loading()) {
+      <div class="post-not-found">
+        <h2>Post not found</h2>
+        <p>This post may have been removed or is no longer available.</p>
+
+        <a class="btn-back" routerLink="/blog">
+          <ng-icon name="lucideArrowLeft" size="16" />
+          <span>Back to blog</span>
+        </a>
+      </div>
+    }
+  </div>
+</div>

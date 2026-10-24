@@ -1,0 +1,56 @@
+<section class="post-edit-page">
+  <div class="container">
+    @if (loading()) {
+      <app-loading-spinner />
+    } @else {
+      @if (post() && initialValues()) {
+        <header class="page-header">
+          <div class="header-top">
+            <h1 class="page-title">
+              <ng-icon
+                name="lucidePenLine"
+                size="22"
+                class="title-icon"
+              />
+              Edit Post
+            </h1>
+
+            @if (isOwner()) {
+              <button
+                type="button"
+                class="btn-delete"
+                (click)="onDelete()"
+                [disabled]="deleting()"
+              >
+                @if (deleting()) {
+                  <ng-icon
+                    name="lucideLoader"
+                    size="16"
+                    class="spin"
+                  />
+                } @else {
+                  <ng-icon name="lucideTrash2" size="16" />
+                  <span>Delete</span>
+                }
+              </button>
+            }
+          </div>
+
+          <p class="page-subtitle">
+            Make changes to your post below.
+          </p>
+        </header>
+
+        <div class="form-card">
+          <app-post-form
+            [initialValues]="initialValues()!"
+            submitLabel="Save Changes"
+            [submitting]="submitting()"
+            (submitUpdate)="onSubmitUpdate($event)"
+            (cancelled)="onCancel()"
+          />
+        </div>
+      }
+    }
+  </div>
+</section>

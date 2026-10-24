@@ -1,0 +1,57 @@
+<div class="follow-list-wrapper">
+  <header class="follow-list-header">
+    <a class="back-link" [routerLink]="['/users/', displayUsername]">
+      ← Back to {{ '@' }}{{ displayUsername }}
+    </a>
+    <h1 class="follow-list-title">{{ '@' }}{{ displayUsername }} — {{ displayKind }}</h1>
+  </header>
+
+  <div class="follow-list-content">
+    <app-loading-spinner *ngIf="loading$ | async"></app-loading-spinner>
+
+    <div class="follow-list-error" *ngIf="(error$ | async) && !(loading$ | async)">
+      <p>Unable to load {{ displayKind.toLowerCase() }}.</p>
+      <a class="btn btn-primary" [routerLink]="['/users/username', displayUsername]">
+        Back to profile
+      </a>
+    </div>
+
+    <ng-container *ngIf="!(loading$ | async) && !(error$ | async)">
+      <div class="follow-list-empty" *ngIf="(users$ | async)?.length === 0">
+        <p>No {{ displayKind.toLowerCase() }} yet.</p>
+      </div>
+
+      <div class="users-grid" *ngIf="users$ | async as users">
+        <a
+          class="user-card"
+          *ngFor="let user of users"
+          [routerLink]="['/users/', user.username]"
+        >
+          <div class="user-card-avatar-wrapper">
+            <img
+              class="user-card-avatar"
+              [src]="user.profilePicture | mediaUrl"
+              [alt]="user.username"
+              onerror="this.style.display='none'"
+            />
+            <div class="user-card-avatar-fallback" *ngIf="!user.profilePicture">
+              {{ user.username.charAt(0).toUpperCase() }}
+            </div>
+          </div>
+
+          <div class="user-card-info">
+            <div class="user-card-username">{{ '@' }}{{ user.username }}</div>
+            <div class="user-card-stats">
+              <span>{{ user.followersCount }} followers</span>
+              <span class="dot">•</span>
+              <span>{{ user.followingCount }} following</span>
+            </div>
+            <div class="user-card-joined">
+              Joined {{ user.createdAt | date: 'mediumDate' }}
+            </div>
+          </div>
+        </a>
+      </div>
+    </ng-container>
+  </div>
+</div>

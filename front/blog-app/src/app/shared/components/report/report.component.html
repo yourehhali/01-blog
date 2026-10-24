@@ -1,0 +1,84 @@
+
+<div class="report-backdrop" (click)="onCancel()">
+  <div
+    class="report-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="report-title"
+    (click)="$event.stopPropagation()"
+  >
+    <div class="report-header">
+      <h2 id="report-title">
+        @if (targetType() === 'post') {
+          Report post
+        } @else {
+          Report user
+        }
+      </h2>
+
+      <button
+        type="button"
+        class="close-btn"
+        aria-label="Close"
+        [disabled]="submitting()"
+        (click)="onCancel()"
+      >
+        &times;
+      </button>
+    </div>
+
+    @if (targetType() === 'post') {
+      <p class="report-description">
+        Report the post
+        <strong>{{ targetTitle() }}</strong>.
+        Please explain why you are reporting this post.
+      </p>
+    } @else {
+      <p class="report-description">
+        Report <strong>{{ '@' }}{{ targetUsername() }}</strong>.
+        Please explain why you are reporting this user.
+      </p>
+    }
+
+    <form (ngSubmit)="submit()">
+      <label for="report-reason">Reason for reporting</label>
+
+      <textarea
+        id="report-reason"
+        name="reason"
+        [ngModel]="reason()"
+        (ngModelChange)="reason.set($event)"
+        placeholder="Describe the issue..."
+        rows="5"
+        maxlength="1000"
+        required
+        [disabled]="submitting()"
+      ></textarea>
+
+      <div class="report-footer">
+        <span>{{ reason().length }}/1000</span>
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          [disabled]="submitting()"
+          (click)="onCancel()"
+        >
+          Cancel
+        </button>
+
+        <button
+          type="submit"
+          class="btn btn-danger"
+          [disabled]="!reason().trim() || submitting()"
+        >
+          @if (submitting()) {
+            Submitting...
+          } @else {
+            Submit report
+          }
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

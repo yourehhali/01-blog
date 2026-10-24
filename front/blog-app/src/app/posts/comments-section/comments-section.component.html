@@ -1,0 +1,154 @@
+<section class="comments-section">
+  <h3 class="comments-title">
+    <ng-icon name="lucideMessageSquare" size="20" />
+    Comments ({{ comments().length }})
+  </h3>
+
+  @if (isAuthenticated()) {
+    <div class="comments-form-wrapper">
+      <form
+        [formGroup]="form"
+        (ngSubmit)="onSubmit()"
+        novalidate
+        class="comments-form"
+      >
+        <div
+          class="form-group"
+          [class.has-error]="
+            form.controls.content.touched &&
+            form.controls.content.invalid
+          "
+        >
+          <textarea
+            formControlName="content"
+            class="comment-textarea"
+            rows="4"
+            placeholder="Write a comment..."
+            [maxlength]="MAX_CONTENT_LENGTH"
+          ></textarea>
+
+          <div class="textarea-footer">
+            <div class="form-errors">
+              @if (
+                form.controls.content.touched &&
+                form.controls.content.hasError('required')
+              ) {
+                <span class="form-error">
+                  Comment cannot be empty.
+                </span>
+              }
+
+              @if (
+                form.controls.content.touched &&
+                form.controls.content.hasError('maxlength')
+              ) {
+                <span class="form-error">
+                  Comment is too long.
+                </span>
+              }
+            </div>
+
+            <span
+              class="char-count"
+              [class.low]="contentRemaining() < 100"
+            >
+              {{ contentRemaining() }} left
+            </span>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="btn-submit"
+          [disabled]="form.invalid || submitting()"
+        >
+          @if (submitting()) {
+            <ng-icon
+              name="lucideLoader"
+              size="16"
+              class="spin"
+            />
+            <span>Posting...</span>
+          } @else {
+            <span>Post Comment</span>
+          }
+        </button>
+      </form>
+    </div>
+  } @else {
+    <div class="login-prompt">
+      <ng-icon
+        name="lucideLock"
+        size="32"
+        class="prompt-icon"
+      />
+      <p class="prompt-text">
+        Please <a routerLink="/login">log in</a> to leave a comment.
+      </p>
+    </div>
+  }
+
+  @if (comments().length > 0) {
+    <div class="comments-divider"></div>
+  }
+
+  @if (loading()) {
+    <div class="comments-loading">
+      <ng-icon name="lucideLoader" size="20" class="spin" />
+      <span>Loading comments...</span>
+    </div>
+  } @else if (comments().length > 0) {
+    <ul class="comments-list">
+      @for (comment of comments(); track comment.id) {
+        <li class="comment-item">
+          <div class="comment-header">
+            <a
+              class="comment-author"
+              [routerLink]="[
+                '/users/',
+                comment.authorUsername
+              ]"
+            >
+              {{ comment.authorUsername }}
+            </a>
+
+            <time class="comment-date">
+              {{ comment.createdAt | date: 'medium' }}
+            </time>
+          </div>
+
+          <div class="comment-body">
+            <p class="comment-content">{{ comment.content }}</p>
+          </div>
+
+          @if (canDelete(comment)) {
+            <div class="comment-actions">
+              <button
+                type="button"
+                class="btn-delete"
+                (click)="onDelete(comment.id)"
+                [disabled]="deletingId() !== null"
+              >
+                @if (deletingId() === comment.id) {
+                  <ng-icon
+                    name="lucideLoader"
+                    size="16"
+                    class="spin"
+                  />
+                  <span>Deleting...</span>
+                } @else {
+                  <ng-icon name="lucideTrash2" size="16" />
+                  <span>Delete</span>
+                }
+              </button>
+            </div>
+          }
+        </li>
+      }
+    </ul>
+  } @else {
+    <div class="empty-comments">
+      <p>No comments yet. Be the first to comment!</p>
+    </div>
+  }
+</section>

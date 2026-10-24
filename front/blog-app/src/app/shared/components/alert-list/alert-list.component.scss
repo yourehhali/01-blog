@@ -1,0 +1,16 @@
+.alert-list {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 9999;
+  max-width: 400px;
+  width: calc(100% - 2rem);
+
+  .alert {
+    margin-bottom: 0.5rem;
+  }
+
+  .alert i {
+    flex-shrink: 0;
+  }
+}

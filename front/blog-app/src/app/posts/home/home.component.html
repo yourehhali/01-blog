@@ -1,0 +1,29 @@
+<section class="home-page">
+  <section class="hero">
+    <h1>Welcome to the Blog</h1>
+    <p class="hero-p">Discover stories, thinking, and expertise from writers<br />on any topic.</p>
+    <a class="hero-btn" routerLink="/blog">Browse All The Posts</a>
+  </section>
+
+  <section class="all-posts">
+    <div class="top">
+      <p>Recent Posts</p>
+      <a class="viewall-btn" routerLink="/blog">View All <ng-icon name="lucideChevronRight" size="14"></ng-icon></a>
+    </div>
+    <span class="divider"></span>
+
+    <app-loading-spinner *ngIf="loading"></app-loading-spinner>
+
+    <div class="posts-grid" *ngIf="!loading && page && page.content.length > 0">
+      <app-post-card
+        *ngFor="let post of page.content; trackBy: trackById"
+        [post]="post"
+      ></app-post-card>
+    </div>
+
+    <div class="empty-state" *ngIf="!loading && (!page || page.content.length === 0)">
+      <ng-icon name="lucideFeather" size="40" class="empty-icon"></ng-icon>
+      <p class="empty-text">No posts yet. Be the first to share your story!</p>
+    </div>
+  </section>
+</section>

@@ -1,0 +1,161 @@
+<div class="admin-layout">
+  <div class="container-fluid">
+    <div class="row g-0">
+
+      <aside class="col-12 col-md-4 col-lg-3 col-xl-2 admin-sidebar p-0">
+        <div class="p-4">
+          <h4>01 blog</h4>
+          <span class="sub-title">Admin Console</span>
+
+          <nav class="nav flex-column">
+            @for (link of primaryLinks; track link.path) {
+              <a
+                class="nav-link"
+                [routerLink]="link.path"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{
+                  exact: link.exact ?? false
+                }"
+              >
+                <ng-icon
+                  [name]="link.icon"
+                  size="16"
+                  class="me-2"
+                />
+                {{ link.label }}
+              </a>
+            }
+          </nav>
+
+          <hr class="sidebar-divider" />
+
+          <nav class="nav flex-column sidebar-sub-links">
+            @for (link of secondaryLinks; track link.path) {
+              <a
+                class="nav-link"
+                [routerLink]="link.path"
+                routerLinkActive="active"
+                [routerLinkActiveOptions]="{
+                  exact: link.exact ?? false
+                }"
+              >
+                <ng-icon
+                  [name]="link.icon"
+                  size="16"
+                  class="me-2"
+                />
+                {{ link.label }}
+              </a>
+            }
+          </nav>
+        </div>
+      </aside>
+
+      <section class="col-12 col-md-8 col-lg-9 col-xl-10 admin-content">
+
+        <header class="content-header">
+          <div class="content-title">
+            <h2>{{ activeRouteTitle() }}</h2>
+
+            <p>
+              Admin &nbsp; / &nbsp; {{ activeRouteTitle() }}
+            </p>
+          </div>
+
+          <div class="header-actions">
+
+            <a
+              class="notif-btn"
+              routerLink="/notifications"
+              aria-label="Notifications"
+            >
+              <ng-icon name="lucideBell" size="18" />
+
+              @if (unreadCount() > 0) {
+                <span class="notif-badge">
+                  {{
+                    unreadCount() > 99
+                      ? '99+'
+                      : unreadCount()
+                  }}
+                </span>
+              }
+            </a>
+
+            <div class="dropdown">
+              <button
+                type="button"
+                class="user-btn d-inline-flex align-items-center"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                @if (currentUser(); as user) {
+                  @if (user.profilePicture | mediaUrl; as profilePicture) {
+                    <img
+                      [src]="profilePicture"
+                      alt="avatar"
+                    />
+                  } @else {
+                    <span class="avatar-initials">
+                      {{ user.username | slice: 0:1 | uppercase }}
+                    </span>
+                  }
+
+                  {{ user.username }}
+
+                  <span class="badge admin">ADMIN</span>
+                }
+              </button>
+
+              <ul class="dropdown-menu dropdown-menu-end">
+
+                @if (currentUser(); as user) {
+                  <li>
+                    <a
+                      class="dropdown-item"
+                      [routerLink]="[
+                        '/users',
+                        user.username
+                      ]"
+                    >
+                      My Profile
+                    </a>
+                  </li>
+                }
+
+                <li>
+                  <a
+                    class="dropdown-item"
+                    routerLink="/profile"
+                  >
+                    Edit Profile
+                  </a>
+                </li>
+
+                <li>
+                  <hr class="dropdown-divider" />
+                </li>
+
+                <li>
+                  <button
+                    type="button"
+                    class="dropdown-item text-danger"
+                    (click)="logout()"
+                  >
+                    Logout
+                  </button>
+                </li>
+
+              </ul>
+            </div>
+          </div>
+        </header>
+        <router-outlet />
+        <footer class="content-footer">
+          Copyright &copy; {{ todayYear }} 01 blog — Admin Console
+        </footer>
+
+      </section>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,111 @@
+<div class="admin-table-container">
+  <div class="table-header">
+    <h2 class="table-title">Manage Posts</h2>
+    <button type="button" class="btn-refresh" (click)="loadPosts()" [disabled]="loading()">
+      <ng-icon name="lucideRotateCw" size="16" [class.spin]="loading()"></ng-icon>
+      Refresh
+    </button>
+  </div>
+
+  @if (loading() && posts().length === 0) {
+  <app-loading-spinner></app-loading-spinner>
+  }
+
+  @if (showTable()) {
+  <div class="table-wrapper">
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Published</th>
+          <th>Hidden</th>
+          <th>Likes</th>
+          <th>Comments</th>
+          <th>Created</th>
+          <th>Updated</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        @if (isEmpty()) {
+        <tr>
+          <td colspan="10" class="empty-state">No posts found</td>
+        </tr>
+        }
+
+        @for (post of posts(); track post.id) {
+        <tr [class.disabled-row]="post.hiddenByAdmin || !post.published">
+          <td class="col-id">{{ post.id }}</td>
+
+          <td class="col-title">
+            <div class="post-title-cell" [title]="post.title">
+              {{ post.title }}
+            </div>
+          </td>
+
+          <td class="col-author">
+            <span class="author-name">{{ '@' }}{{ post.authorUsername }}</span>
+          </td>
+
+          <td class="col-bool">
+            <span class="bool-badge" [class.yes]="post.published" [class.no]="!post.published">
+              <ng-icon [name]="post.published ? 'lucideCircleCheck' : 'lucideEyeOff'" size="14"></ng-icon>
+              {{ post.published ? 'Yes' : 'Draft' }}
+            </span>
+          </td>
+
+          <td class="col-bool">
+            <span class="bool-badge hidden" [class.yes]="post.hiddenByAdmin" [class.no]="!post.hiddenByAdmin">
+              <ng-icon [name]="post.hiddenByAdmin ? 'lucideShieldHalf' : 'lucideCircle'" size="14"></ng-icon>
+              {{ post.hiddenByAdmin ? 'Hidden' : 'Visible' }}
+            </span>
+          </td>
+
+          <td class="col-num">{{ post.likes }}</td>
+          <td class="col-num">{{ post.commentsCount }}</td>
+
+          <td class="col-date">
+            {{ post.createdAt | date : 'shortDate' }}
+          </td>
+
+          <td class="col-date">
+            {{ post.updatedAt | date : 'shortDate' }}
+          </td>
+
+          <td class="col-actions">
+            <div class="actions-group">
+              @if (!post.hiddenByAdmin) {
+              <button type="button" class="action-btn btn-hide" (click)="hidePost(post)"
+                [disabled]="isProcessing(post.id)" title="Hide post">
+                <ng-icon [name]="isProcessing(post.id) ? 'lucideLoader' : 'lucideEyeOff'" size="14"
+                  [class.spin]="isProcessing(post.id)"></ng-icon>
+                <span>Hide</span>
+              </button>
+              }
+
+              @if (post.hiddenByAdmin) {
+              <button type="button" class="action-btn btn-unhide" (click)="unhidePost(post)"
+                [disabled]="isProcessing(post.id)" title="Unhide post">
+                <ng-icon [name]="isProcessing(post.id) ? 'lucideLoader' : 'lucideEye'" size="14"
+                  [class.spin]="isProcessing(post.id)"></ng-icon>
+                <span>Unhide</span>
+              </button>
+              }
+
+              <button type="button" class="action-btn btn-delete" (click)="deletePost(post)"
+                [disabled]="isProcessing(post.id)" title="Delete post">
+                <ng-icon [name]="isProcessing(post.id) ? 'lucideLoader' : 'lucideTrash2'" size="14"
+                  [class.spin]="isProcessing(post.id)"></ng-icon>
+                <span>Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+  }

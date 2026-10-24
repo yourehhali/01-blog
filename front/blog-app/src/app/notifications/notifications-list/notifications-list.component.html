@@ -1,0 +1,112 @@
+
+<div class="notifications-container">
+  <div class="notifications-header">
+    <h2 class="notifications-title">Notifications</h2>
+
+    <div class="header-actions">
+      @if (unreadCount() > 0) {
+        <span class="unread-badge">
+          {{ unreadCount() }} unread
+        </span>
+      }
+
+      <button
+        type="button"
+        class="btn-mark-all"
+        (click)="markAllRead()"
+        [disabled]="loading() || !page() || unreadCount() === 0"
+      >
+        <ng-icon name="lucideCheckCheck" size="16" />
+        Mark all read
+      </button>
+    </div>
+  </div>
+
+  @if (loading() && !page()) {
+    <app-loading-spinner />
+  }
+
+  @if (page(); as currentPageData) {
+    <div class="table-wrapper">
+      <table class="notifications-table">
+        <thead>
+          <tr>
+            <th>Status</th>
+            <th>Message</th>
+            <th>Link</th>
+            <th>Created</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          @for (n of currentPageData.content; track n.id) {
+            <tr
+              class="notification-row"
+              [class.unread]="!n.read"
+              (click)="onRowClick(n)"
+              [title]="n.read ? '' : 'Click to mark as read'"
+            >
+              <td class="col-status">
+                <span
+                  class="read-badge"
+                  [class.is-read]="n.read"
+                >
+                  @if (n.read) {
+                    <ng-icon name="lucideMailOpen" size="16" />
+                  } @else {
+                    <ng-icon name="lucideMail" size="16" />
+                  }
+
+                  {{ n.read ? 'Read' : 'Unread' }}
+                </span>
+              </td>
+
+              <td class="col-message">
+                {{ n.message }}
+              </td>
+
+              <td class="col-link">
+                @if (n.targetUrl) {
+                  <a
+                    [href]="n.targetUrl"
+                    (click)="$event.stopPropagation()"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="target-link"
+                  >
+                    <ng-icon
+                      name="lucideArrowUpRightFromSquare"
+                      size="14"
+                    />
+                    Open
+                  </a>
+                } @else {
+                  <span class="no-link">—</span>
+                }
+              </td>
+
+              <td class="col-date">
+                {{ n.createdAt | date : 'medium' }}
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td colspan="4" class="empty-state">
+                No notifications
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    @if (!currentPageData.empty && currentPageData.totalPages > 1) {
+      <div class="pagination-wrapper">
+        <app-pagination
+          [page]="currentPageData"
+          (pageChange)="onPageChange($event)"
+        />
+      </div>
+    }
+  }
+</div>

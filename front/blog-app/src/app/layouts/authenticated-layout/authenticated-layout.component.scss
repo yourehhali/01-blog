@@ -1,0 +1,4 @@
+// Authenticated layout reuses the global Freebees navbar/footer styles.
+.auth-navbar .nav-link.active::after {
+  background-color: #f8cb33;
+}

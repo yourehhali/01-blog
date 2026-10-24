@@ -1,0 +1,25 @@
+<div class="alert-list">
+  <ng-container *ngFor="let alert of alerts$ | async">
+    <div
+      class="alert alert-dismissible fade show d-flex align-items-center"
+      [ngClass]="getClass(alert.type)"
+      role="alert"
+    >
+      <ng-container [ngSwitch]="alert.type">
+        <ng-icon name="lucideCircleCheck" size="18" *ngSwitchCase="'success'"></ng-icon>
+        <ng-icon name="lucideCircleX" size="18" *ngSwitchCase="'danger'"></ng-icon>
+        <ng-icon name="lucideCircleX" size="18" *ngSwitchCase="'error'"></ng-icon>
+        <ng-icon name="lucideInfo" size="18" *ngSwitchCase="'info'"></ng-icon>
+        <ng-icon name="lucideTriangleAlert" size="18" *ngSwitchCase="'warning'"></ng-icon>
+        <ng-icon name="lucideMessageSquare" size="18" *ngSwitchDefault></ng-icon>
+      </ng-container>
+      <span class="ms-2 flex-grow-1">{{ alert.message }}</span>
+      <button
+        type="button"
+        class="btn-close ms-2"
+        aria-label="Close"
+        (click)="dismiss(alert.id)"
+      ></button>
+    </div>
+  </ng-container>
+</div>

@@ -1,0 +1,119 @@
+
+<div class="auth-split">
+  <div class="auth-form-panel">
+    <a class="auth-logo" routerLink="/">
+      <img src="assets/ui/logo-s.png" alt="O1 BLOG" />
+    </a>
+
+    <div class="auth-form-content">
+      <h1 class="auth-title">Log in</h1>
+
+      <form
+        [formGroup]="form"
+        (ngSubmit)="onSubmit()"
+        novalidate
+        class="auth-form"
+      >
+        <div
+          class="form-group"
+          [class.has-error]="
+            form.controls.identifier.touched &&
+            form.controls.identifier.invalid
+          "
+        >
+          <label for="identifier" class="form-label">
+            Identifier
+          </label>
+
+          <input
+            id="identifier"
+            type="text"
+            formControlName="identifier"
+            class="form-input"
+            autocomplete="username"
+            [disabled]="submitting()"
+            placeholder="Enter your username or email"
+          />
+
+          @if (
+            form.controls.identifier.touched &&
+            form.controls.identifier.errors?.['required']
+          ) {
+            <div class="form-error">
+              Identifier is required
+            </div>
+          }
+        </div>
+
+        <div
+          class="form-group"
+          [class.has-error]="
+            form.controls.password.touched &&
+            form.controls.password.invalid
+          "
+        >
+          <label for="password" class="form-label">
+            Password
+          </label>
+
+          <input
+            id="password"
+            type="password"
+            formControlName="password"
+            class="form-input"
+            autocomplete="current-password"
+            [disabled]="submitting()"
+            placeholder="Enter your password"
+          />
+
+          @if (
+            form.controls.password.touched &&
+            form.controls.password.errors?.['required']
+          ) {
+            <div class="form-error">
+              Password is required
+            </div>
+          }
+        </div>
+
+        @if (serverError(); as error) {
+          <div class="form-error server-error" role="alert">
+            {{ error }}
+          </div>
+        }
+
+        <button
+          type="submit"
+          class="btn-submit"
+          [disabled]="form.invalid || submitting()"
+        >
+          @if (submitting()) {
+            <ng-icon
+              name="lucideLoader"
+              size="18"
+              class="spin"
+              aria-label="Logging in"
+            />
+          } @else {
+            <span>Log in</span>
+          }
+        </button>
+      </form>
+
+      <p class="auth-footer">
+        Don't have an account?
+        <a class="auth-link" routerLink="/register">
+          Sign up
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <div class="auth-banner">
+    <img
+      src="assets/ui/logo-l.png"
+      alt="O1 BLOG"
+      class="auth-banner-logo"
+    />
+  </div>
+</div>

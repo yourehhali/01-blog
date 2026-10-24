@@ -1,0 +1,195 @@
+
+<div class="auth-split">
+  <div class="auth-form-panel">
+    <a class="auth-logo" routerLink="/">
+      <img src="assets/ui/logo-s.png" alt="O1 BLOG" />
+    </a>
+
+    <div class="auth-form-content">
+      <h1 class="auth-title">Sign up</h1>
+
+      <form
+        [formGroup]="form"
+        (ngSubmit)="onSubmit()"
+        novalidate
+        class="auth-form"
+      >
+        <div
+          class="form-group"
+          [class.has-error]="
+            form.controls.username.touched &&
+            form.controls.username.invalid
+          "
+        >
+          <label for="username" class="form-label">
+            Username
+          </label>
+
+          <input
+            id="username"
+            type="text"
+            formControlName="username"
+            class="form-input"
+            autocomplete="username"
+            [disabled]="submitting()"
+            placeholder="Choose a username"
+          />
+
+          @if (
+            form.controls.username.touched &&
+            form.controls.username.errors?.['required']
+          ) {
+            <div class="form-error">
+              Username is required
+            </div>
+          }
+
+          @if (
+            form.controls.username.touched &&
+            form.controls.username.errors?.['minlength']
+          ) {
+            <div class="form-error">
+              Username must be at least 2 characters
+            </div>
+          }
+
+          @if (
+            form.controls.username.touched &&
+            form.controls.username.errors?.['maxlength']
+          ) {
+            <div class="form-error">
+              Username cannot exceed 100 characters
+            </div>
+          }
+        </div>
+
+        <div
+          class="form-group"
+          [class.has-error]="
+            form.controls.email.touched &&
+            form.controls.email.invalid
+          "
+        >
+          <label for="email" class="form-label">
+            Email
+          </label>
+
+          <input
+            id="email"
+            type="email"
+            formControlName="email"
+            class="form-input"
+            autocomplete="email"
+            [disabled]="submitting()"
+            placeholder="Enter your email"
+          />
+
+          @if (
+            form.controls.email.touched &&
+            form.controls.email.errors?.['required']
+          ) {
+            <div class="form-error">
+              Email is required
+            </div>
+          }
+
+          @if (
+            form.controls.email.touched &&
+            form.controls.email.errors?.['email']
+          ) {
+            <div class="form-error">
+              Enter a valid email address
+            </div>
+          }
+        </div>
+
+        <div
+          class="form-group"
+          [class.has-error]="
+            form.controls.password.touched &&
+            form.controls.password.invalid
+          "
+        >
+          <label for="password" class="form-label">
+            Password
+          </label>
+
+          <input
+            id="password"
+            type="password"
+            formControlName="password"
+            class="form-input"
+            autocomplete="new-password"
+            [disabled]="submitting()"
+            placeholder="Create a password"
+          />
+
+          @if (
+            form.controls.password.touched &&
+            form.controls.password.errors?.['required']
+          ) {
+            <div class="form-error">
+              Password is required
+            </div>
+          }
+
+          @if (
+            form.controls.password.touched &&
+            form.controls.password.errors?.['minlength']
+          ) {
+            <div class="form-error">
+              Password must be at least 8 characters
+            </div>
+          }
+
+          @if (
+            form.controls.password.touched &&
+            form.controls.password.errors?.['maxlength']
+          ) {
+            <div class="form-error">
+              Password cannot exceed 128 characters
+            </div>
+          }
+        </div>
+
+        @if (serverError(); as error) {
+          <div class="form-error server-error" role="alert">
+            {{ error }}
+          </div>
+        }
+
+        <button
+          type="submit"
+          class="btn-submit"
+          [disabled]="form.invalid || submitting()"
+        >
+          @if (submitting()) {
+            <ng-icon
+              name="lucideLoader"
+              size="18"
+              class="spin"
+              aria-label="Registering"
+            />
+          } @else {
+            <span>Sign up</span>
+          }
+        </button>
+      </form>
+
+      <p class="auth-footer">
+        Already have an account?
+        <a class="auth-link" routerLink="/login">
+          Log in
+        </a>
+      </p>
+    </div>
+  </div>
+
+  <div class="auth-banner">
+    <img
+      src="assets/ui/logo-l.png"
+      alt="O1 BLOG"
+      class="auth-banner-logo"
+    />
+  </div>
+</div>

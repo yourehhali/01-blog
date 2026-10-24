@@ -1,0 +1,29 @@
+<section class="following-feed-page">
+  <section class="all-posts">
+    <div class="top">
+      <p>Following Feed</p>
+    </div>
+    <span class="divider"></span>
+
+    <app-loading-spinner *ngIf="loading"></app-loading-spinner>
+
+    <div class="posts-grid" *ngIf="!loading && page && page.content.length > 0">
+      <app-post-card
+        *ngFor="let post of page.content; trackBy: trackById"
+        [post]="post"
+      ></app-post-card>
+    </div>
+
+    <div class="empty-state" *ngIf="!loading && (!page || page.content.length === 0)">
+      <ng-icon name="lucideUserPlus" size="48" class="empty-icon"></ng-icon>
+      <p class="empty-text">Your feed is empty. Start following other users to see their posts here.</p>
+    </div>
+
+    <div class="pagination-wrapper" *ngIf="!loading && paginationPage && paginationPage.totalPages > 1">
+      <app-pagination
+        [page]="paginationPage"
+        (pageChange)="onPageChange($event)"
+      ></app-pagination>
+    </div>
+  </section>
+</section>

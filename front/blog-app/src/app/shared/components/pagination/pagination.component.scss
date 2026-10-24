@@ -1,0 +1,11 @@
+.page-link {
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+.page-item.active .page-link {
+  background-color: #bf61f6 !important;
+  border-color: #bf61f6 !important;
+  color: #000 !important;
+}

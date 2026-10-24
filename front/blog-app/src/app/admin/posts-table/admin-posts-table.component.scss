@@ -1,0 +1,68 @@
+@import '../../shared/admin-table.shared.scss';
+
+.col-title {
+  max-width: 280px;
+}
+
+.post-title-cell {
+  font-weight: 600;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 280px;
+}
+
+.col-author {
+  width: 160px;
+}
+
+.author-name {
+  font-weight: 600;
+  color: #D1D1D1;
+  font-size: 0.85rem;
+}
+
+.col-bool {
+  width: 110px;
+  white-space: nowrap;
+}
+
+.bool-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.25rem 0.55rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border: 1px solid;
+  border-radius: 4px;
+
+  &.yes {
+    border-color: #28a745;
+    color: #28a745;
+    background-color: rgba(40, 167, 69, 0.1);
+  }
+
+  &.no {
+    border-color: #7a7a7a;
+    color: #7a7a7a;
+    background-color: rgba(122, 122, 122, 0.1);
+  }
+
+  &.hidden {
+    &.yes {
+      border-color: #e74c3c;
+      color: #e74c3c;
+      background-color: rgba(231, 76, 60, 0.1);
+    }
+
+    &.no {
+      border-color: #28a745;
+      color: #28a745;
+      background-color: rgba(40, 167, 69, 0.1);
+    }
+  }
+}

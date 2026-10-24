@@ -1,0 +1,99 @@
+.stats-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.stats-header {
+  margin-bottom: 28px;
+  h1 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 0 0 6px;
+    letter-spacing: 0.02em;
+  }
+  p {
+    margin: 0;
+    color: #ACACAC;
+    font-size: 0.9rem;
+  }
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+.kpi-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 110px;
+  background: #0B0B0B;
+  border: 1px solid #1C1C1C;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+
+  &:hover {
+    border-color: #bf61f6;
+    transform: translateY(-2px);
+  }
+
+  .kpi-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+    background: rgba(191, 97, 246, 0.12);
+    color: #bf61f6;
+    border-radius: 12px;
+  }
+
+  .kpi-content {
+    flex: 1;
+    min-width: 0;
+    p {
+      margin: 0;
+      color: #ACACAC;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+    }
+    h2 {
+      margin: 4px 0 0;
+      color: #fff;
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+  }
+
+  &.kpi-active .kpi-icon {
+    background: rgba(40, 167, 69, 0.12);
+    color: #28a745;
+  }
+
+  &.kpi-posts .kpi-icon {
+    background: rgba(91, 37, 122, 0.3);
+    color: #bf61f6;
+  }
+
+  &.kpi-reports .kpi-icon {
+    background: rgba(231, 76, 60, 0.12);
+    color: #e74c3c;
+  }
+}
+
+@media (max-width: 575px) {
+  .kpi-card {
+    padding: 1.25rem;
+    .kpi-content h2 {
+      font-size: 1.6rem;
+    }
+  }
+}

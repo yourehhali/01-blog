@@ -1,0 +1,20 @@
+<section class="post-create-page">
+  <div class="container">
+    <header class="page-header">
+      <h1 class="page-title">
+        <ng-icon name="lucidePenTool" size="22" class="title-icon"></ng-icon>
+        Create New Post
+      </h1>
+      <p class="page-subtitle">Share your story with the community.</p>
+    </header>
+
+    <div class="form-card">
+      <app-post-form
+        submitLabel="Publish Post"
+        [submitting]="submitting"
+        (submitCreate)="onSubmitCreate($event)"
+        (cancelled)="onCancel()"
+      ></app-post-form>
+    </div>
+  </div>
+</section>

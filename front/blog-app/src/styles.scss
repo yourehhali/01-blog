@@ -1,0 +1,935 @@
+// ============================================================
+// O1 BLOG — Global Visual Language (purple / black dark theme)
+// Reference: /Users/yorehhali/Desktop/Coding Area/Zone01/01-blog/front-ui/
+// ============================================================
+
+$primary: #5B257A;
+$accent: #bf61f6;
+$bg: #000000;
+$card-bg: #0B0B0B;
+$input-bg: #1C1C1C;
+$input-border: #3B3B3B;
+$text-primary: #ffffff;
+$text-secondary: #D1D1D1;
+$text-muted: #ACACAC;
+$text-faint: #7a7a7a;
+$radius-card: 8px;
+$radius-input: 4px;
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-padding-top: 100px;
+}
+
+body {
+  position: relative;
+  font-family: sans-serif;
+  background-color: $bg;
+  color: $text-primary;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+section {
+  margin-top: 0;
+}
+
+h1, h2, h3, h4, h5 {
+  color: $text-primary;
+  font-weight: 600;
+}
+
+// =============================================
+// Forms
+// =============================================
+textarea,
+input[type='text'],
+input[type='password'],
+input[type='datetime'],
+input[type='datetime-local'],
+input[type='date'],
+input[type='month'],
+input[type='time'],
+input[type='week'],
+input[type='number'],
+input[type='email'],
+input[type='url'],
+input[type='search'],
+input[type='tel'],
+input[type='color'],
+input:not([type]),
+.form-control,
+.form-select {
+  background-color: $input-bg !important;
+  border: 1px solid $input-border !important;
+  border-radius: $radius-input !important;
+  color: $text-primary !important;
+  padding: 14px 12px;
+  font-size: 14px;
+}
+
+textarea::placeholder,
+input::placeholder,
+.form-control::placeholder {
+  color: $text-faint;
+}
+
+textarea:focus,
+input:focus,
+.form-control:focus,
+.form-select:focus {
+  border-color: $accent !important;
+  box-shadow: 0 0 0 0.2rem rgba(191, 97, 246, 0.15) !important;
+  outline: 0 none !important;
+  background-color: $input-bg !important;
+}
+
+label {
+  color: $text-primary;
+  font-size: 14px;
+}
+
+// =============================================
+// Buttons
+// =============================================
+.main-button {
+  text-decoration: none;
+  color: $bg;
+  background-color: $text-primary;
+  padding: 14px 40px;
+  border: none;
+  border-radius: $radius-input;
+  font-weight: 500;
+  display: inline-block;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.main-button-black {
+  text-decoration: none;
+  color: $text-primary;
+  background: linear-gradient(-90deg, rgba(91, 37, 122, 0.4), rgba(0, 0, 0, 0.4));
+  border: 1px solid $primary;
+  padding: 14px 40px;
+  border-radius: $radius-input;
+  font-weight: 500;
+  display: inline-block;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: $accent;
+    color: $accent;
+  }
+}
+
+.mainmargin {
+  margin-top: 0;
+  min-height: calc(100vh - 72px);
+}
+
+// =============================================
+// Navbar (sticky, solid dark background)
+// =============================================
+.navbar.dark,
+.navbar.auth-navbar {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 72px;
+  padding: 0 100px;
+  background-color: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  z-index: 1050;
+  display: flex;
+  align-items: center;
+}
+
+.navbar.dark .container,
+.navbar.auth-navbar .container {
+  max-width: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.navbar .navbar-brand {
+  color: $text-primary !important;
+  font-weight: 700;
+  padding: 0;
+  margin-right: 32px;
+  img {
+    height: 32px;
+    width: auto;
+  }
+}
+
+.navbar .nav-link {
+  color: $text-primary;
+  padding: 8px 0 !important;
+  transition: color 0.15s ease-in-out;
+  position: relative;
+}
+
+.navbar .nav-link:hover {
+  color: $accent;
+}
+
+.navbar .nav-link.active {
+  color: $accent;
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: $accent;
+  }
+}
+
+.navbar .navbar-toggler svg {
+  color: $text-primary;
+}
+
+.navbar-toggler {
+  padding: 0;
+  border: 0;
+}
+
+/* Navbar content wrapper: brand + nav on left, actions on right */
+.navbar .navbar-collapse {
+  flex-grow: 0;
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+// Login button (transparent)
+.navbar .btn-login {
+  background: transparent;
+  border: 1px solid transparent;
+  color: $text-primary;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: $radius-input;
+  transition: all 0.15s ease-in-out;
+  &:hover { color: $accent; border-color: rgba(191, 97, 246, 0.3); }
+}
+
+// Register button (purple gradient border)
+.navbar .btn-register {
+  padding: 8px 20px;
+  border: 1px solid $accent;
+  border-radius: $radius-input;
+  background: $accent;
+  color: $bg;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  &:hover {
+    background: transparent;
+    color: $accent;
+  }
+}
+
+.notif-badge {
+  background-color: $accent !important;
+  color: $bg !important;
+  font-weight: 700 !important;
+  font-size: 0.65rem !important;
+  border-radius: 12px;
+  padding: 2px 6px;
+  margin-left: 4px;
+  vertical-align: super;
+}
+
+.dropdown-menu {
+  background-color: $card-bg;
+  border: 1px solid $input-border;
+  border-radius: $radius-input;
+
+  .dropdown-item {
+    color: $text-primary;
+    &:hover {
+      background-color: rgba(191, 97, 246, 0.1);
+      color: $accent;
+    }
+  }
+  .dropdown-divider {
+    border-color: $input-border;
+  }
+}
+
+// =============================================
+// Hero
+// =============================================
+.hero {
+  background-image: url('assets/ui/bg.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  min-height: calc(100vh - 72px);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: $text-primary;
+  gap: 12px;
+  padding: 60px 1rem;
+  text-align: center;
+
+  h1 {
+    font-size: clamp(2rem, 10vw, 3rem);
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .hero-p {
+    color: $text-secondary;
+    text-align: center;
+    margin: 0;
+  }
+}
+
+.hero-btn {
+  margin-top: 12px;
+  padding: 14px 40px;
+  border: 1px solid $primary;
+  border-radius: $radius-input;
+  background: linear-gradient(-90deg, rgba(91, 37, 122, 0.4), rgba(0, 0, 0, 0.4));
+  color: $text-primary;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.2s ease;
+  &:hover {
+    border-color: $accent;
+    color: $accent;
+  }
+}
+
+// =============================================
+// All posts section
+// =============================================
+.all-posts {
+  width: 100%;
+  display: flex;
+  gap: 22px;
+  flex-direction: column;
+  padding: 60px 100px;
+  background-color: $bg;
+}
+
+.all-posts .top {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.all-posts .top p {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.viewall-btn {
+  color: $text-primary;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  &:hover {
+    color: $accent;
+    text-decoration: underline;
+  }
+}
+
+.divider {
+  display: block;
+  width: 100%;
+  height: 2px;
+  border-radius: 50%;
+  filter: opacity(0.2);
+  background-color: $text-secondary;
+}
+
+.posts-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 22px;
+}
+
+// =============================================
+// Post card (vertical, dark)
+// =============================================
+.post-card {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background-color: $card-bg;
+  border-radius: $radius-card;
+  align-items: flex-start;
+  justify-content: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  min-width: 0;
+}
+
+.post-card .post-card-media {
+  width: 100%;
+  height: 260px;
+  overflow: hidden;
+  border-radius: $radius-card $radius-card 0 0;
+  display: block;
+}
+
+.post-card .post-card-media img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+}
+
+.post-card .post-card-body {
+  padding: 36px;
+  padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+  width: 100%;
+  min-width: 0;
+}
+
+.post-card .post-card-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+  width: 70%;
+  a {
+    color: $text-primary;
+    text-decoration: none;
+    &:hover { color: $accent; }
+  }
+}
+
+.post-card .post-card-meta {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.post-card .post-card-author {
+  display: flex;
+  gap: 12px;
+  color: $text-secondary;
+  align-items: center;
+  text-decoration: none;
+  min-width: 0;
+  &:hover { color: $accent; }
+  img {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.post-card .post-card-time {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  color: $text-muted;
+  font-size: 14px;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.post-card .post-card-excerpt {
+  color: $text-muted;
+  margin: 0;
+  width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.read-btn {
+  background: transparent;
+  border: none;
+  color: $text-primary;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  &:hover {
+    color: $accent;
+    text-decoration: underline;
+  }
+}
+
+// =============================================
+// Subscribe section
+// =============================================
+.subscribe {
+  padding: 70px 100px;
+  background-color: $card-bg;
+  text-align: center;
+  h2 { padding-bottom: 20px; }
+  p { color: $text-muted; }
+  form {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 24px;
+    .email, .button-subscribe {
+      display: inline-block;
+      padding: 0 30px;
+      height: 50px;
+      border: 1px solid $input-border;
+      border-radius: $radius-input;
+    }
+    .email {
+      background-color: $input-bg;
+      color: $text-primary;
+      width: 300px;
+      max-width: 90%;
+    }
+    .button-subscribe {
+      color: $bg;
+      background-color: $text-primary;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      &:hover { opacity: 0.9; }
+    }
+  }
+}
+
+// =============================================
+// Footer
+// =============================================
+footer {
+  background-color: $bg;
+  color: $text-muted;
+  padding: 40px 100px;
+  margin-top: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+
+  .footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-icons {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    a {
+      color: $text-muted;
+      &:hover { color: $accent; }
+    }
+  }
+
+  .copyright p {
+    margin: 0;
+    font-size: 0.85rem;
+    a {
+      color: $text-muted;
+      text-decoration: none;
+      &:hover { color: $accent; }
+    }
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 20px;
+    a {
+      color: $text-muted;
+      text-decoration: none;
+      &:hover { color: $accent; }
+    }
+  }
+}
+
+// =============================================
+// Pagination
+// =============================================
+.pagination {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  li a {
+    color: $text-primary;
+    padding: 10px 15px !important;
+    border-radius: $radius-input !important;
+    border: 1px solid $input-border;
+    background-color: $card-bg;
+    margin: 0 2px;
+    &:hover { color: $accent; border-color: $accent; background: rgba(191, 97, 246, 0.05); }
+    &:focus { outline: none; box-shadow: none !important; }
+  }
+  .page-link {
+    border-radius: $radius-input !important;
+    &:focus { box-shadow: none !important; }
+  }
+  .active .page-link {
+    background-color: $accent !important;
+    color: $bg !important;
+    border-color: $accent !important;
+    &:hover { background-color: $accent; }
+  }
+  .disabled .page-link {
+    color: $text-faint;
+    background-color: $card-bg;
+    opacity: 0.5;
+  }
+}
+
+// =============================================
+// Loading spinner
+// =============================================
+.loading-spinner-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 0;
+  color: $accent;
+}
+
+// =============================================
+// Empty state
+// =============================================
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: $card-bg;
+  border-radius: $radius-card;
+  color: $text-muted;
+  .empty-icon {
+    font-size: 3rem;
+    color: $accent;
+    margin-bottom: 1rem;
+    display: block;
+  }
+}
+
+// =============================================
+// Auth navbar dropdown
+// =============================================
+.auth-navbar .dropdown-menu {
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+// =============================================
+// Admin layout (accented to match purple theme)
+// =============================================
+.admin-layout {
+  min-height: 100vh;
+  background: $bg;
+  .admin-sidebar {
+    background: $card-bg;
+    color: $text-primary;
+    min-height: 100vh;
+    position: sticky;
+    top: 0;
+    padding: 28px 22px;
+    h4 {
+      color: $accent;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 800;
+      margin: 0 0 4px;
+      font-size: 1.05rem;
+    }
+    .sub-title {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.6;
+      margin: 0 0 24px;
+      display: block;
+    }
+    nav.nav { gap: 4px; }
+    .nav-link {
+      color: rgba(255, 255, 255, 0.85);
+      padding: 10px 14px;
+      border-left: 3px solid transparent;
+      border-radius: 0;
+      font-size: 0.85rem;
+      letter-spacing: 0.03em;
+      transition: background-color 0.12s ease-in-out, color 0.12s ease-in-out, border-color 0.12s ease-in-out;
+      i { width: 18px; display: inline-block; text-align: center; }
+      &:hover {
+        background: rgba(255, 255, 255, 0.04);
+        color: $accent;
+      }
+      &.active {
+        background: rgba(191, 97, 246, 0.08);
+        color: $accent;
+        border-left-color: $accent;
+        font-weight: 700;
+      }
+    }
+    .sidebar-divider {
+      border: none;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      margin: 24px 0;
+    }
+    .sidebar-sub-links {
+      margin-top: 12px;
+      .nav-link {
+        color: rgba(255, 255, 255, 0.65);
+        padding: 8px 14px;
+        font-size: 0.8rem;
+        &:hover { color: $accent; background: rgba(255, 255, 255, 0.04); }
+      }
+    }
+  }
+  .admin-content {
+    background: $bg;
+    padding: 28px 32px;
+    min-height: 100vh;
+    .content-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      padding: 0 0 20px;
+      margin: 0 0 28px;
+      border-bottom: 1px solid $input-border;
+      .content-title {
+        margin: 0;
+        h2 {
+          font-size: 1.55rem;
+          font-weight: 800;
+          letter-spacing: 0.03em;
+          text-transform: uppercase;
+          color: $text-primary;
+          margin: 0 0 4px;
+        }
+        p {
+          font-size: 0.75rem;
+          letter-spacing: 0.1em;
+          color: $text-muted;
+          margin: 0;
+          text-transform: uppercase;
+        }
+      }
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        .notif-btn {
+          position: relative;
+          padding: 8px 14px;
+          background: $card-bg;
+          border: 1px solid $input-border;
+          color: $text-primary;
+          border-radius: $radius-input;
+          &:hover { border-color: $accent; color: $accent; }
+        }
+        .user-btn {
+          padding: 8px 14px;
+          background: $card-bg;
+          color: $text-primary;
+          border: 1px solid $input-border;
+          border-radius: $radius-input;
+          .badge.admin {
+            background: $accent;
+            color: $bg;
+            border-radius: $radius-input;
+            font-weight: 800;
+            padding: 2px 8px;
+            font-size: 0.7rem;
+            letter-spacing: 0.06em;
+            margin-left: 8px;
+          }
+          img, .avatar-initials {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 8px;
+            font-weight: 700;
+            font-size: 0.8rem;
+          }
+          .avatar-initials {
+            background: $accent;
+            color: $bg;
+          }
+        }
+      }
+    }
+    .content-footer {
+      text-align: center;
+      padding-top: 20px;
+      margin-top: 48px;
+      border-top: 1px solid $input-border;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: $text-muted;
+    }
+  }
+  .kpi-card {
+    background: $card-bg;
+    padding: 22px 26px;
+    border: 1px solid $input-border;
+    border-left: 4px solid $accent;
+    border-radius: $radius-card;
+    transition: box-shadow 0.15s ease-in-out, transform 0.15s ease-in-out;
+    &:hover {
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+      transform: translateY(-1px);
+    }
+    h2 {
+      font-size: 2.1rem;
+      color: $text-primary;
+      margin: 0.25rem 0 0;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    p {
+      color: $text-muted;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 0;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+  }
+  table.admin-table {
+    background: $card-bg;
+    color: $text-primary;
+    thead th {
+      background: $bg;
+      color: $text-primary;
+      text-transform: uppercase;
+      font-weight: 600;
+      border: 0;
+      border-bottom: 1px solid $input-border;
+    }
+    tbody tr { border-bottom: 1px solid $input-border; }
+    tbody tr:hover { background: rgba(191, 97, 246, 0.06); }
+    .actions {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      .btn { border-radius: $radius-input; }
+    }
+  }
+}
+
+// =============================================
+// Report modal
+// =============================================
+.report-modal .modal-content {
+  background-color: $card-bg;
+  color: $text-primary;
+  border-radius: $radius-card;
+  border: 1px solid $input-border;
+}
+
+// =============================================
+// Unread notification row
+// =============================================
+.notif-row {
+  border-left: 3px solid transparent;
+  &.unread {
+    border-left-color: $accent;
+    background: rgba(191, 97, 246, 0.06);
+    font-weight: 600;
+  }
+}
+
+// =============================================
+// Responsive
+// =============================================
+@media (max-width: 991px) {
+  .navbar.dark,
+  .navbar.auth-navbar {
+    padding: 0 24px;
+  }
+  .all-posts {
+    padding: 40px 24px;
+  }
+  .subscribe {
+    padding: 50px 24px;
+  }
+  footer {
+    padding: 30px 24px;
+  }
+}
+
+@media (min-width: 992px) {
+  .navbar.dark .nav-link,
+  .navbar.auth-navbar .nav-link {
+    margin-left: 24px;
+  }
+}
+
+// =============================================
+// Utilities
+// =============================================
+.spin {
+  animation: spin 1s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

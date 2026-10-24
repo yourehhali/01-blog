@@ -1,0 +1,55 @@
+<aside class="post-sidebar">
+  <div class="sidebar-search sidebar-widget">
+    <h3 class="widget-title">Search</h3>
+    <form (ngSubmit)="onSearchSubmit()" novalidate>
+      <div class="search-input-wrapper">
+        <input
+          type="text"
+          [(ngModel)]="searchQuery"
+          name="search"
+          class="search-input"
+          placeholder="Search users..."
+        />
+        <button type="submit" class="search-btn" aria-label="Search">
+          <ng-icon name="lucideSearch" size="16"></ng-icon>
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div class="sidebar-widget">
+    <h3 class="widget-title">Popular</h3>
+    <div class="popular-grid" *ngIf="loaded && popularPosts.length > 0; else noPopular">
+      <a
+        class="popular-card"
+        *ngFor="let post of popularPosts; trackBy: trackById"
+        [routerLink]="['/posts', post.id]"
+      >
+        <div class="popular-image" *ngIf="getFirstMediaUrl(post)">
+          <img [src]="getFirstMediaUrl(post) | mediaUrl" [alt]="post.title" loading="lazy" />
+        </div>
+        <div class="popular-image popular-placeholder" *ngIf="!getFirstMediaUrl(post)">
+          <ng-icon name="lucideImage" size="28"></ng-icon>
+        </div>
+      </a>
+    </div>
+    <ng-template #noPopular>
+      <p class="widget-empty">No posts yet.</p>
+    </ng-template>
+  </div>
+
+  <div class="sidebar-widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <ul class="recent-list" *ngIf="loaded && recentPosts.length > 0; else noRecent">
+      <li class="recent-item" *ngFor="let post of recentPosts; trackBy: trackById">
+        <a class="recent-link" [routerLink]="['/posts', post.id]">
+          <h4 class="recent-title">{{ post.title }}</h4>
+          <span class="recent-date">{{ post.createdAt | date:'mediumDate' }}</span>
+        </a>
+      </li>
+    </ul>
+    <ng-template #noRecent>
+      <p class="widget-empty">No posts yet.</p>
+    </ng-template>
+  </div>
+</aside>

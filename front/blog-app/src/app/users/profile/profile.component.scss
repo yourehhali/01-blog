@@ -1,0 +1,244 @@
+.profile-page {
+  min-height: 100%;
+  background-color: #000;
+  padding: 40px 100px 60px;
+}
+
+.profile-card {
+  max-width: 1100px;
+  margin: 0 auto 32px;
+  background-color: #0B0B0B;
+  border-radius: 8px;
+  padding: 40px;
+  display: flex;
+  align-items: flex-start;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.profile-avatar-wrapper {
+  flex-shrink: 0;
+}
+
+.profile-avatar,
+.profile-avatar-fallback {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-color: #1C1C1C;
+}
+
+.profile-avatar-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #bf61f6;
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+.profile-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-label {
+  color: #bf61f6;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin: 0 0 8px;
+}
+
+.profile-name {
+  color: #fff;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 8px;
+  line-height: 1.1;
+}
+
+.profile-handle-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.profile-handle {
+  color: #ACACAC;
+  font-size: 1rem;
+}
+
+.profile-role-badge {
+  background-color: #5B257A;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+.profile-bio {
+  color: #D1D1D1;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0 0 16px;
+}
+
+.profile-joined {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #7a7a7a;
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.profile-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
+  min-width: 160px;
+  flex-shrink: 0;
+}
+
+.profile-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  border: none;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.follow-btn {
+  background-color: #fff;
+  color: #000;
+  &:hover:not(:disabled) { opacity: 0.9; }
+  &:disabled { opacity: 0.5; cursor: not-allowed; }
+}
+
+.report-btn {
+  background-color: transparent;
+  color: #e74c3c;
+  border: 1px solid #e74c3c;
+  &:hover { background-color: rgba(231, 76, 60, 0.1); }
+}
+
+.profile-stats-row {
+  max-width: 1100px;
+  margin: 0 auto 48px;
+  display: flex;
+  gap: 48px;
+  padding: 24px 40px;
+  background-color: #0B0B0B;
+  border-radius: 8px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-decoration: none;
+  color: inherit;
+  strong {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+  span {
+    color: #ACACAC;
+    font-size: 0.8rem;
+    margin-top: 4px;
+  }
+}
+
+.stat-link {
+  cursor: pointer;
+  &:hover strong { color: #bf61f6; }
+}
+
+.profile-posts-section {
+  max-width: 1100px;
+  margin: 0 auto;
+  .section-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    p { margin: 0; font-size: 1.2rem; font-weight: 600; color: #fff; }
+  }
+}
+
+.divider {
+  display: block;
+  height: 1px;
+  background-color: #3B3B3B;
+  margin-bottom: 24px;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  .empty-icon {
+    color: #3B3B3B;
+    margin-bottom: 16px;
+  }
+  .empty-text {
+    color: #ACACAC;
+    font-size: 1rem;
+  }
+  .read-btn {
+    margin-top: 16px;
+  }
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 767px) {
+  .profile-page {
+    padding: 24px 20px 40px;
+  }
+  .profile-card {
+    padding: 24px;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .profile-info {
+    width: 100%;
+  }
+  .profile-handle-row {
+    justify-content: center;
+  }
+  .profile-actions {
+    width: 100%;
+    max-width: 280px;
+  }
+  .profile-stats-row {
+    justify-content: center;
+    gap: 24px;
+    padding: 20px;
+  }
+  .stat-item {
+    align-items: center;
+  }
+}
