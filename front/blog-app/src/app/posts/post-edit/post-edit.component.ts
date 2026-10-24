@@ -6,7 +6,7 @@ import {
   inject,
   signal,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { EMPTY, catchError, finalize, switchMap, take, tap } from 'rxjs';
 
@@ -29,11 +29,10 @@ import { NgIconComponent } from '@ng-icons/core';
 @Component({
     selector: 'app-post-edit',
     imports: [
-        CommonModule,
-        PostFormComponent,
-        LoadingSpinnerComponent,
-        NgIconComponent,
-    ],
+    PostFormComponent,
+    LoadingSpinnerComponent,
+    NgIconComponent
+],
     templateUrl: './post-edit.component.html',
     styleUrls: ['./post-edit.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

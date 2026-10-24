@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 
-export type AlertType = 'success' | 'danger' | 'warning' | 'info';
+export type AlertType = 'success' | 'danger' | 'error' | 'warning' | 'info';
 
 export interface Alert {
   id: number;

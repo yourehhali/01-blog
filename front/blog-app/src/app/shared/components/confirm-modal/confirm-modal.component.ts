@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, Output, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 
 interface BootstrapModal {
   show(): void;
@@ -22,7 +22,7 @@ declare global {
 
 @Component({
     selector: 'app-confirm-modal',
-    imports: [CommonModule],
+    imports: [],
     templateUrl: './confirm-modal.component.html',
     styleUrls: ['./confirm-modal.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

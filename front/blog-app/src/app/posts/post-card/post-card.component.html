@@ -1,10 +1,14 @@
 <article class="post-card">
-  <a class="post-card-media" [routerLink]="['/posts', post.id]" *ngIf="firstMediaUrl">
-    <img [src]="firstMediaUrl | mediaUrl" [alt]="post.title" loading="lazy" />
-  </a>
-  <div class="post-card-media" *ngIf="!firstMediaUrl">
-    <img src="assets/ui/Post.png" [alt]="post.title" loading="lazy" />
-  </div>
+  @if (firstMediaUrl) {
+    <a class="post-card-media" [routerLink]="['/posts', post.id]">
+      <img [src]="firstMediaUrl | mediaUrl" [alt]="post.title" loading="lazy" />
+    </a>
+  }
+  @if (!firstMediaUrl) {
+    <div class="post-card-media">
+      <img src="assets/ui/Post.png" [alt]="post.title" loading="lazy" />
+    </div>
+  }
   <div class="post-card-body">
     <h2 class="post-card-title">
       <a [routerLink]="['/posts', post.id]">{{ post.title }}</a>

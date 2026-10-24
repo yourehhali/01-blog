@@ -1,45 +1,46 @@
 <div class="stats-container">
-  <app-loading-spinner *ngIf="loading && !stats"></app-loading-spinner>
+  @if (loading && !stats) {
+    <app-loading-spinner></app-loading-spinner>
+  }
 
-  <div class="kpi-grid" *ngIf="stats">
-    <div class="kpi-card kpi-users">
-      <div class="kpi-icon">
-        <ng-icon name="lucideUsers" size="24"></ng-icon>
+  @if (stats) {
+    <div class="kpi-grid">
+      <div class="kpi-card kpi-users">
+        <div class="kpi-icon">
+          <ng-icon name="lucideUsers" size="24"></ng-icon>
+        </div>
+        <div class="kpi-content">
+          <p>Total Users</p>
+          <h2>{{ stats.totalUsers | number }}</h2>
+        </div>
       </div>
-      <div class="kpi-content">
-        <p>Total Users</p>
-        <h2>{{ stats.totalUsers | number }}</h2>
+      <div class="kpi-card kpi-active">
+        <div class="kpi-icon">
+          <ng-icon name="lucideUserCheck" size="24"></ng-icon>
+        </div>
+        <div class="kpi-content">
+          <p>Active Users</p>
+          <h2>{{ stats.activeUsers | number }}</h2>
+        </div>
+      </div>
+      <div class="kpi-card kpi-posts">
+        <div class="kpi-icon">
+          <ng-icon name="lucideNewspaper" size="24"></ng-icon>
+        </div>
+        <div class="kpi-content">
+          <p>Total Posts</p>
+          <h2>{{ stats.totalPosts | number }}</h2>
+        </div>
+      </div>
+      <div class="kpi-card kpi-reports">
+        <div class="kpi-icon">
+          <ng-icon name="lucideFlag" size="24"></ng-icon>
+        </div>
+        <div class="kpi-content">
+          <p>Total Reports</p>
+          <h2>{{ stats.totalReports | number }}</h2>
+        </div>
       </div>
     </div>
-
-    <div class="kpi-card kpi-active">
-      <div class="kpi-icon">
-        <ng-icon name="lucideUserCheck" size="24"></ng-icon>
-      </div>
-      <div class="kpi-content">
-        <p>Active Users</p>
-        <h2>{{ stats.activeUsers | number }}</h2>
-      </div>
-    </div>
-
-    <div class="kpi-card kpi-posts">
-      <div class="kpi-icon">
-        <ng-icon name="lucideNewspaper" size="24"></ng-icon>
-      </div>
-      <div class="kpi-content">
-        <p>Total Posts</p>
-        <h2>{{ stats.totalPosts | number }}</h2>
-      </div>
-    </div>
-
-    <div class="kpi-card kpi-reports">
-      <div class="kpi-icon">
-        <ng-icon name="lucideFlag" size="24"></ng-icon>
-      </div>
-      <div class="kpi-content">
-        <p>Total Reports</p>
-        <h2>{{ stats.totalReports | number }}</h2>
-      </div>
-    </div>
-  </div>
+  }
 </div>

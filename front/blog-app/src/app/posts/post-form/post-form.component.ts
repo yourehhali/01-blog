@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { FormBuilder, ReactiveFormsModule, Validators, FormGroup } from '@angular/forms';
 import { CreatePostRequest } from '../../core/models/post';
 import { NgIconComponent } from "@ng-icons/core";
@@ -18,7 +18,7 @@ export interface PostFormInitialValues {
 
 @Component({
     selector: 'app-post-form',
-    imports: [CommonModule, ReactiveFormsModule, NgIconComponent],
+    imports: [ReactiveFormsModule, NgIconComponent],
     templateUrl: './post-form.component.html',
     styleUrls: ['./post-form.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

@@ -1,54 +1,49 @@
 
 <div class="edit-wrapper">
-  <app-loading-spinner *ngIf="loading$ | async"></app-loading-spinner>
+  @if (loading$ | async) {
+    <app-loading-spinner></app-loading-spinner>
+  }
 
-  <ng-container *ngIf="currentUser$ | async as currentUser">
+  @if (currentUser$ | async; as currentUser) {
     <div class="edit-card">
       <header class="edit-header">
         <a
           class="back-link"
           [routerLink]="['/users/', currentUser.username]"
-        >
+          >
           ← Back to profile
         </a>
-
         <h1 class="edit-title">Edit Profile</h1>
       </header>
-
       <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
         <div class="form-section">
           <label class="form-label">Profile Picture</label>
-
           <div class="avatar-editor">
             <div class="avatar-preview-wrapper">
-              <img
-                class="avatar-preview"
-                *ngIf="previewUrl$ | async; else existingOrFallback"
-                [src]="previewUrl$ | async"
-                alt="Preview"
-              />
-
-              <ng-template #existingOrFallback>
+              @if (previewUrl$ | async) {
                 <img
                   class="avatar-preview"
-                  *ngIf="currentUser.profilePicture; else avatarFallback"
-                  [src]="currentUser.profilePicture | mediaUrl"
-                  [alt]="currentUser.username"
-                  onerror="this.style.display='none'"
-                />
-
-                <ng-template #avatarFallback>
+                  [src]="previewUrl$ | async"
+                  alt="Preview"
+                  />
+              } @else {
+                @if (currentUser.profilePicture) {
+                  <img
+                    class="avatar-preview"
+                    [src]="currentUser.profilePicture | mediaUrl"
+                    [alt]="currentUser.username"
+                    onerror="this.style.display='none'"
+                    />
+                } @else {
                   <div class="avatar-fallback">
                     {{ currentUser.username.charAt(0).toUpperCase() }}
                   </div>
-                </ng-template>
-              </ng-template>
+                }
+              }
             </div>
-
             <div class="file-controls">
               <label class="btn btn-outline file-input-label">
                 Choose Image
-
                 <input
                   id="profilePicture"
                   type="file"
@@ -56,19 +51,18 @@
                   class="file-input"
                   (change)="onFileSelected($event)"
                   [disabled]="!!(submitting$ | async)"
-                />
+                  />
               </label>
-
-              <button
-                type="button"
-                class="btn btn-outline btn-ghost"
-                *ngIf="selectedFile$ | async"
-                (click)="clearFile()"
-                [disabled]="!!(submitting$ | async)"
-              >
-                Remove New Image
-              </button>
-
+              @if (selectedFile$ | async) {
+                <button
+                  type="button"
+                  class="btn btn-outline btn-ghost"
+                  (click)="clearFile()"
+                  [disabled]="!!(submitting$ | async)"
+                  >
+                  Remove New Image
+                </button>
+              }
               <p class="file-hint">
                 JPG, PNG, GIF up to 50MB. If you don't choose a new image,
                 your current picture is kept.
@@ -76,15 +70,13 @@
             </div>
           </div>
         </div>
-
         <div
           class="form-section"
           [class.has-error]="
             form.controls.bio.touched && form.controls.bio.invalid
           "
-        >
+          >
           <label for="bio" class="form-label">Bio</label>
-
           <textarea
             id="bio"
             formControlName="bio"
@@ -92,46 +84,45 @@
             class="form-textarea"
             placeholder="Tell us about yourself..."
           ></textarea>
-
           <div class="form-counter">
             {{ form.controls.bio.value.length }} / 2000
           </div>
-
-          <div
-            class="form-error"
-            *ngIf="
-              form.controls.bio.touched &&
-              form.controls.bio.errors?.['maxlength']
-            "
-          >
-            Bio must be 2000 characters or fewer
-          </div>
+          @if (
+            form.controls.bio.touched &&
+            form.controls.bio.errors?.['maxlength']
+            ) {
+            <div
+              class="form-error"
+              >
+              Bio must be 2000 characters or fewer
+            </div>
+          }
         </div>
-
         <div class="form-actions">
           <button
             type="submit"
             class="btn btn-primary btn-submit"
             [disabled]="form.invalid || (submitting$ | async)"
-          >
-            <span *ngIf="!(submitting$ | async)">Save Changes</span>
-
-            <ng-icon
-              name="lucideLoader"
-              size="18"
-              class="spin"
-              *ngIf="submitting$ | async"
-            ></ng-icon>
+            >
+            @if (!(submitting$ | async)) {
+              <span>Save Changes</span>
+            }
+            @if (submitting$ | async) {
+              <ng-icon
+                name="lucideLoader"
+                size="18"
+                class="spin"
+              ></ng-icon>
+            }
           </button>
-
           <a
             class="btn btn-outline btn-cancel"
             [routerLink]="['/users/', currentUser.username]"
-          >
+            >
             Cancel
           </a>
         </div>
       </form>
     </div>
-  </ng-container>
+  }
 </div>

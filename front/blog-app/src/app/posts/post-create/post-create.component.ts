@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { Router } from '@angular/router';
 import { PostService } from '../../core/api/post.service';
 import { AlertService } from '../../core/api/alert.service';
@@ -12,7 +12,7 @@ import { NgIconComponent } from "@ng-icons/core";
 
 @Component({
     selector: 'app-post-create',
-    imports: [CommonModule, PostFormComponent, NgIconComponent],
+    imports: [PostFormComponent, NgIconComponent],
     templateUrl: './post-create.component.html',
     styleUrls: ['./post-create.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

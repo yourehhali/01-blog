@@ -7,70 +7,74 @@
     </button>
   </div>
 
-  <app-loading-spinner *ngIf="loading() && reports().length === 0"></app-loading-spinner>
+  @if (loading() && reports().length === 0) {
+    <app-loading-spinner></app-loading-spinner>
+  }
 
-  <div class="table-wrapper" *ngIf="showTable()">
-    <table class="admin-table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Type</th>
-          <th>Target</th>
-          <th>Reported By</th>
-          <th>Reason</th>
-          <th>Created</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        @if (isEmpty()) {
-        <tr>
-          <td colspan="7" class="empty-state">No reports — all clear!</td>
-        </tr>
-        }
-        @for (report of reports(); track report.id) {
-        <tr>
-          <td class="col-id">{{ report.id }}</td>
-          <td class="col-type">
-            <span class="type-badge" [ngClass]="'type-' + report.reportType.toLowerCase()">
-              <ng-icon [name]="report.reportType === 'POST' ? 'lucideNewspaper' : 'lucideUser'" size="14"></ng-icon>
-              {{ report.reportType }}
-            </span>
-          </td>
-          <td class="col-target">
-            <div class="target-info">
-              <span class="target-username">{{ '@' }}{{ report.targetUsername }}</span>
-              <span class="target-id">(ID: {{ report.targetId }})</span>
-            </div>
-          </td>
-          <td class="col-reporter">
-            <span class="reporter-username">{{ '@' }}{{ report.reporterUsername }}</span>
-          </td>
-          <td class="col-reason">
-            <div class="reason-text" [title]="report.reason">
-              {{ report.reason }}
-            </div>
-          </td>
-          <td class="col-date">
-            {{ report.createdAt | date : 'medium' }}
-          </td>
-          <td class="col-actions">
-            <div class="actions-group">
-              <button
-                type="button"
-                class="action-btn btn-dismiss"
-                (click)="dismissReport(report)"
-                [disabled]="isProcessing(report.id)"
-                title="Dismiss report"
-              >
-                <ng-icon [name]="isProcessing(report.id) ? 'lucideLoader' : 'lucideX'" size="14" [class.spin]="isProcessing(report.id)"></ng-icon>
-                <span>Dismiss</span>
-              </button>
-            </div>
-          </td>
-        </tr>
-        }
-      </tbody>
-    </table>
-  </div>
+  @if (showTable()) {
+    <div class="table-wrapper">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Type</th>
+            <th>Target</th>
+            <th>Reported By</th>
+            <th>Reason</th>
+            <th>Created</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @if (isEmpty()) {
+            <tr>
+              <td colspan="7" class="empty-state">No reports — all clear!</td>
+            </tr>
+          }
+          @for (report of reports(); track report.id) {
+            <tr>
+              <td class="col-id">{{ report.id }}</td>
+              <td class="col-type">
+                <span class="type-badge" [ngClass]="'type-' + report.reportType.toLowerCase()">
+                  <ng-icon [name]="report.reportType === 'POST' ? 'lucideNewspaper' : 'lucideUser'" size="14"></ng-icon>
+                  {{ report.reportType }}
+                </span>
+              </td>
+              <td class="col-target">
+                <div class="target-info">
+                  <span class="target-username">{{ '@' }}{{ report.targetUsername }}</span>
+                  <span class="target-id">(ID: {{ report.targetId }})</span>
+                </div>
+              </td>
+              <td class="col-reporter">
+                <span class="reporter-username">{{ '@' }}{{ report.reporterUsername }}</span>
+              </td>
+              <td class="col-reason">
+                <div class="reason-text" [title]="report.reason">
+                  {{ report.reason }}
+                </div>
+              </td>
+              <td class="col-date">
+                {{ report.createdAt | date : 'medium' }}
+              </td>
+              <td class="col-actions">
+                <div class="actions-group">
+                  <button
+                    type="button"
+                    class="action-btn btn-dismiss"
+                    (click)="dismissReport(report)"
+                    [disabled]="isProcessing(report.id)"
+                    title="Dismiss report"
+                    >
+                    <ng-icon [name]="isProcessing(report.id) ? 'lucideLoader' : 'lucideX'" size="14" [class.spin]="isProcessing(report.id)"></ng-icon>
+                    <span>Dismiss</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
 </div>

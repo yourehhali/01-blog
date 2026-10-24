@@ -1,18 +1,30 @@
 <div class="alert-list">
-  <ng-container *ngFor="let alert of alerts$ | async">
+  @for (alert of alerts$ | async; track alert) {
     <div
       class="alert alert-dismissible fade show d-flex align-items-center"
       [ngClass]="getClass(alert.type)"
       role="alert"
-    >
-      <ng-container [ngSwitch]="alert.type">
-        <ng-icon name="lucideCircleCheck" size="18" *ngSwitchCase="'success'"></ng-icon>
-        <ng-icon name="lucideCircleX" size="18" *ngSwitchCase="'danger'"></ng-icon>
-        <ng-icon name="lucideCircleX" size="18" *ngSwitchCase="'error'"></ng-icon>
-        <ng-icon name="lucideInfo" size="18" *ngSwitchCase="'info'"></ng-icon>
-        <ng-icon name="lucideTriangleAlert" size="18" *ngSwitchCase="'warning'"></ng-icon>
-        <ng-icon name="lucideMessageSquare" size="18" *ngSwitchDefault></ng-icon>
-      </ng-container>
+      >
+      @switch (alert.type) {
+        @case ('success') {
+          <ng-icon name="lucideCircleCheck" size="18"></ng-icon>
+        }
+        @case ('danger') {
+          <ng-icon name="lucideCircleX" size="18"></ng-icon>
+        }
+        @case ('error') {
+          <ng-icon name="lucideCircleX" size="18"></ng-icon>
+        }
+        @case ('info') {
+          <ng-icon name="lucideInfo" size="18"></ng-icon>
+        }
+        @case ('warning') {
+          <ng-icon name="lucideTriangleAlert" size="18"></ng-icon>
+        }
+        @default {
+          <ng-icon name="lucideMessageSquare" size="18"></ng-icon>
+        }
+      }
       <span class="ms-2 flex-grow-1">{{ alert.message }}</span>
       <button
         type="button"
@@ -21,5 +33,5 @@
         (click)="dismiss(alert.id)"
       ></button>
     </div>
-  </ng-container>
+  }
 </div>

@@ -7,7 +7,7 @@ import {
   inject,
   signal
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { PostService } from '../../core/api/post.service';
 import { PostResponse } from '../../core/models/post';
 import { SpringPage } from '../../core/models/spring-page';
@@ -22,12 +22,11 @@ import { NgIconComponent } from '@ng-icons/core';
 @Component({
     selector: 'app-blog-list',
     imports: [
-        CommonModule,
-        PostCardComponent,
-        PaginationComponent,
-        LoadingSpinnerComponent,
-        NgIconComponent
-    ],
+    PostCardComponent,
+    PaginationComponent,
+    LoadingSpinnerComponent,
+    NgIconComponent
+],
     templateUrl: './blog-list.component.html',
     styleUrls: ['./blog-list.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

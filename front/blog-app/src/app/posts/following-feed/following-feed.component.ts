@@ -5,7 +5,7 @@ import {
   OnInit,
   inject
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { PostService } from '../../core/api/post.service';
 import { PostResponse } from '../../core/models/post';
 import { SpringPage } from '../../core/models/spring-page';
@@ -16,7 +16,7 @@ import { NgIconComponent } from "@ng-icons/core";
 
 @Component({
     selector: 'app-following-feed',
-    imports: [CommonModule, PostCardComponent, PaginationComponent, LoadingSpinnerComponent, NgIconComponent],
+    imports: [PostCardComponent, PaginationComponent, LoadingSpinnerComponent, NgIconComponent],
     templateUrl: './following-feed.component.html',
     styleUrls: ['./following-feed.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

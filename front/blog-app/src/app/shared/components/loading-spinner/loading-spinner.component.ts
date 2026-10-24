@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { NgIconComponent } from "@ng-icons/core";
 
 @Component({
     selector: 'app-loading-spinner',
-    imports: [CommonModule, NgIconComponent],
+    imports: [NgIconComponent],
     templateUrl: './loading-spinner.component.html',
     styleUrls: ['./loading-spinner.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

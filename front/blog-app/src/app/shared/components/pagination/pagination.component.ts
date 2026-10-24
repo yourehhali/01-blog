@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { NgIconComponent } from "@ng-icons/core";
 
 export interface Page<Item = unknown> {
@@ -15,7 +15,7 @@ export interface Page<Item = unknown> {
 
 @Component({
     selector: 'app-pagination',
-    imports: [CommonModule, NgIconComponent],
+    imports: [NgIconComponent],
     templateUrl: './pagination.component.html',
     styleUrls: ['./pagination.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

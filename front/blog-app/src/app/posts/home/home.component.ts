@@ -5,7 +5,7 @@ import {
   OnInit,
   inject
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { RouterModule } from '@angular/router';
 import { PostService } from '../../core/api/post.service';
 import { PostResponse } from '../../core/models/post';
@@ -17,7 +17,7 @@ import { NgIconComponent } from "@ng-icons/core";
 
 @Component({
     selector: 'app-home',
-    imports: [CommonModule, RouterModule, PostCardComponent, LoadingSpinnerComponent, NgIconComponent],
+    imports: [RouterModule, PostCardComponent, LoadingSpinnerComponent, NgIconComponent],
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

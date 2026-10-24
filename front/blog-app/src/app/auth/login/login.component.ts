@@ -6,7 +6,7 @@ import {
   inject,
   signal
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import {
   FormBuilder,
   ReactiveFormsModule,
@@ -23,11 +23,10 @@ import { NgIconComponent } from '@ng-icons/core';
 @Component({
     selector: 'app-login',
     imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        RouterModule,
-        NgIconComponent
-    ],
+    ReactiveFormsModule,
+    RouterModule,
+    NgIconComponent
+],
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush

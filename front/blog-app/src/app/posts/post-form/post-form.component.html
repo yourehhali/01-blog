@@ -2,7 +2,7 @@
   <div
     class="form-group"
     [class.has-error]="form.controls.title.touched && form.controls.title.invalid"
-  >
+    >
     <label for="post-title" class="form-label">Title</label>
     <input
       id="post-title"
@@ -12,27 +12,30 @@
       placeholder="Enter post title..."
       [disabled]="submitting"
       maxlength="255"
-    />
+      />
     <div class="input-footer">
       <div class="form-errors">
-        <span
-          class="form-error"
-          *ngIf="form.controls.title.touched && form.controls.title.errors?.['required']"
-        >
-          Title is required
-        </span>
-        <span
-          class="form-error"
-          *ngIf="form.controls.title.touched && form.controls.title.errors?.['minlength']"
-        >
-          Title must be at least 1 character
-        </span>
-        <span
-          class="form-error"
-          *ngIf="form.controls.title.touched && form.controls.title.errors?.['maxlength']"
-        >
-          Title is too long
-        </span>
+        @if (form.controls.title.touched && form.controls.title.errors?.['required']) {
+          <span
+            class="form-error"
+            >
+            Title is required
+          </span>
+        }
+        @if (form.controls.title.touched && form.controls.title.errors?.['minlength']) {
+          <span
+            class="form-error"
+            >
+            Title must be at least 1 character
+          </span>
+        }
+        @if (form.controls.title.touched && form.controls.title.errors?.['maxlength']) {
+          <span
+            class="form-error"
+            >
+            Title is too long
+          </span>
+        }
       </div>
       <span class="char-count" [class.low]="titleRemaining < 30">
         {{ titleRemaining }} left
@@ -43,7 +46,7 @@
   <div
     class="form-group"
     [class.has-error]="form.controls.content.touched && form.controls.content.invalid"
-  >
+    >
     <label for="post-content" class="form-label">Content</label>
     <textarea
       id="post-content"
@@ -56,24 +59,27 @@
     ></textarea>
     <div class="input-footer">
       <div class="form-errors">
-        <span
-          class="form-error"
-          *ngIf="form.controls.content.touched && form.controls.content.errors?.['required']"
-        >
-          Content is required
-        </span>
-        <span
-          class="form-error"
-          *ngIf="form.controls.content.touched && form.controls.content.errors?.['minlength']"
-        >
-          Content must be at least 10 characters
-        </span>
-        <span
-          class="form-error"
-          *ngIf="form.controls.content.touched && form.controls.content.errors?.['maxlength']"
-        >
-          Content is too long
-        </span>
+        @if (form.controls.content.touched && form.controls.content.errors?.['required']) {
+          <span
+            class="form-error"
+            >
+            Content is required
+          </span>
+        }
+        @if (form.controls.content.touched && form.controls.content.errors?.['minlength']) {
+          <span
+            class="form-error"
+            >
+            Content must be at least 10 characters
+          </span>
+        }
+        @if (form.controls.content.touched && form.controls.content.errors?.['maxlength']) {
+          <span
+            class="form-error"
+            >
+            Content is too long
+          </span>
+        }
       </div>
       <span class="char-count" [class.low]="contentRemaining < 200">
         {{ contentRemaining }} left
@@ -95,46 +101,49 @@
       accept="image/*,video/*"
       (change)="onFilesSelected($event)"
       [disabled]="submitting"
-    />
+      />
 
-    <div class="media-preview" *ngIf="existingMediaUrls.length > 0 || selectedFiles.length > 0">
-      <div
-        class="media-item existing"
-        *ngFor="let url of existingMediaUrls; let i = index"
-      >
-        <img [src]="url" alt="Existing media" loading="lazy" />
-        <button
-          type="button"
-          class="media-remove"
-          (click)="onRemoveExistingMedia(i)"
-          [disabled]="submitting"
-          aria-label="Remove media"
-        >
-          <ng-icon name="lucideX" size="16"></ng-icon>
-        </button>
-        <span class="media-badge">Existing</span>
+    @if (existingMediaUrls.length > 0 || selectedFiles.length > 0) {
+      <div class="media-preview">
+        @for (url of existingMediaUrls; track url; let i = $index) {
+          <div
+            class="media-item existing"
+            >
+            <img [src]="url" alt="Existing media" loading="lazy" />
+            <button
+              type="button"
+              class="media-remove"
+              (click)="onRemoveExistingMedia(i)"
+              [disabled]="submitting"
+              aria-label="Remove media"
+              >
+              <ng-icon name="lucideX" size="16"></ng-icon>
+            </button>
+            <span class="media-badge">Existing</span>
+          </div>
+        }
+        @for (file of selectedFiles; track file; let i = $index) {
+          <div
+            class="media-item"
+            >
+            <div class="media-placeholder">
+              <ng-icon name="lucideFileUp" size="24"></ng-icon>
+              <span class="file-name">{{ file.name }}</span>
+              <span class="file-size">{{ formatFileSize(file.size) }}</span>
+            </div>
+            <button
+              type="button"
+              class="media-remove"
+              (click)="onRemoveFile(i)"
+              [disabled]="submitting"
+              aria-label="Remove file"
+              >
+              <ng-icon name="lucideX" size="16"></ng-icon>
+            </button>
+          </div>
+        }
       </div>
-
-      <div
-        class="media-item"
-        *ngFor="let file of selectedFiles; let i = index"
-      >
-        <div class="media-placeholder">
-          <ng-icon name="lucideFileUp" size="24"></ng-icon>
-          <span class="file-name">{{ file.name }}</span>
-          <span class="file-size">{{ formatFileSize(file.size) }}</span>
-        </div>
-        <button
-          type="button"
-          class="media-remove"
-          (click)="onRemoveFile(i)"
-          [disabled]="submitting"
-          aria-label="Remove file"
-        >
-          <ng-icon name="lucideX" size="16"></ng-icon>
-        </button>
-      </div>
-    </div>
+    }
   </div>
 
   <div class="form-group checkbox-group">
@@ -143,11 +152,13 @@
         type="checkbox"
         formControlName="published"
         [disabled]="submitting"
-      />
+        />
       <span class="checkbox-custom"></span>
       <span class="checkbox-text">
         Publish immediately
-        <span class="checkbox-hint" *ngIf="!form.controls.published.value">(will be saved as draft)</span>
+        @if (!form.controls.published.value) {
+          <span class="checkbox-hint">(will be saved as draft)</span>
+        }
       </span>
     </label>
   </div>
@@ -158,16 +169,20 @@
       class="btn-cancel"
       (click)="onCancelClick()"
       [disabled]="submitting"
-    >
+      >
       Cancel
     </button>
     <button
       type="submit"
       class="btn-submit"
       [disabled]="form.invalid || submitting"
-    >
-      <span *ngIf="!submitting">{{ submitLabel }}</span>
-      <ng-icon name="lucideLoader" size="16" class="spin" *ngIf="submitting"></ng-icon>
+      >
+      @if (!submitting) {
+        <span>{{ submitLabel }}</span>
+      }
+      @if (submitting) {
+        <ng-icon name="lucideLoader" size="16" class="spin"></ng-icon>
+      }
     </button>
   </div>
 </form>
