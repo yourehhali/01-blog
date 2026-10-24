@@ -1,0 +1,89 @@
+
+# Dependencies
+node_modules/
+.pnp
+.pnp.*
+bower_components/
+
+# Angular build output and cache
+dist/
+out-tsc/
+.angular/
+coverage/
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+!.env.template
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Local configuration
+*.local
+
+# Certificates and private keys
+*.pem
+*.key
+*.p12
+*.pfx
+
+# IDEs and editors
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/tasks.json
+*.sublime-workspace
+*.sublime-project
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+Thumbs.db:encryptable
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+*.bak
+
+# Test reports and tooling artifacts
+.nyc_output/
+playwright-report/
+test-results/
+
+# TypeScript build artifacts
+*.tsbuildinfo
+
+# Debug output
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# Optional package manager files
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# Generated Angular files
+/src/environments/environment.prod.local.ts
